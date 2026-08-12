@@ -404,7 +404,7 @@ start index.html  # Windows
 源码中的工具页会复用 `assets/css/tool-base.css` 和 `assets/js/tool-chrome.js`，便于统一维护设计基座和悬浮导航。若需要把某个工具打包成一个可下载、可分享、可 `file://` 打开的单文件 HTML，可使用 standalone 导出命令：
 
 ```bash
-npm run export:standalone -- tools/dev/json-formatter.html
+pnpm run export:standalone tools/dev/json-formatter.html
 ```
 
 默认输出到：
@@ -416,7 +416,7 @@ dist-standalone/tools/dev/json-formatter.html
 也可以指定输出目录：
 
 ```bash
-npm run export:standalone -- tools/dev/json-formatter.html /tmp/webutils-export
+pnpm run export:standalone tools/dev/json-formatter.html /tmp/webutils-export
 ```
 
 导出文件会内联本地共享 CSS/JS。外部 CDN 依赖会保持为外链，并在文件头部说明。
@@ -479,7 +479,7 @@ git clone https://github.com/chicogong/html-tools.git
 cd html-tools
 
 # 安装依赖（仅用于 lint）
-npm install
+pnpm install
 ```
 
 ### 本地预览
@@ -505,16 +505,16 @@ python -m http.server 8000
 
 ```bash
 # 运行全部检查
-npm run lint
+pnpm run lint
 
 # 单独检查
-npm run lint:html  # HTMLHint
-npm run lint:css   # Stylelint
-npm run lint:js    # ESLint
+pnpm run lint:html  # HTMLHint
+pnpm run lint:css   # Stylelint
+pnpm run lint:js    # ESLint
 
 # 代码格式化
-npm run format        # 格式化所有文件
-npm run format:check  # 检查格式
+pnpm run format        # 格式化所有文件
+pnpm run format:check  # 检查格式
 ```
 
 ### 工具同步
@@ -523,7 +523,7 @@ npm run format:check  # 检查格式
 
 ```bash
 # 同步 tools.json 到 index.html
-npm run sync:tools
+pnpm run sync:tools
 ```
 
 CI 会自动检查同步状态，如果 `tools.json` 和 `index.html` 不一致，构建会失败。
@@ -541,9 +541,9 @@ CI 会自动检查同步状态，如果 `tools.json` 和 `index.html` 不一致�
      "keywords": "关键词1 关键词2 keyword"
    }
    ```
-4. 运行 `npm run sync:tools` 同步到 index.html
+4. 运行 `pnpm run sync:tools` 同步到 index.html
 5. 更新 `README.md` 工具列表
-6. 运行 `npm run lint` 确保代码规范
+6. 运行 `pnpm run lint` 确保代码规范
 7. 提交更改（CI 会检查同步状态）
 
 ### 工具模板
@@ -591,7 +591,7 @@ CI 会自动检查同步状态，如果 `tools.json` 和 `index.html` 不一致�
 
 - **独立工具页**: 每个工具都是可直接打开的 HTML 页面
 - **共享源码基座**: 源码中复用 `tool-base.css` 和 `tool-chrome.js`，避免 1000+ 工具重复维护同一套外壳
-- **Standalone 导出**: 需要分发单文件时，使用 `npm run export:standalone -- <tool-path>` 内联本地共享资源
+- **Standalone 导出**: 需要分发单文件时，使用 `pnpm run export:standalone <tool-path>` 内联本地共享资源
 - **CDN 依赖**: 如需第三方库，使用 CDN（推荐 cdnjs/unpkg/jsdelivr）
 - **URL 状态**: 支持通过 URL hash 保存和恢复状态
 - **纯前端**: 所有处理在浏览器完成，不上传数据
@@ -622,8 +622,8 @@ git checkout -b feature/new-tool
 # ...
 
 # 运行检查
-npm run lint          # Lint 检查
-npm run format:check  # 格式检查
+pnpm run lint          # Lint 检查
+pnpm run format:check  # 格式检查
 
 # 提交代码
 git add .

@@ -24,13 +24,13 @@ git clone https://github.com/chicogong/html-tools.git
 cd html-tools
 
 # 安装依赖
-npm install
+pnpm install
 
 # 运行 lint 检查
-npm run lint
+pnpm run lint
 
 # 同步工具列表
-npm run sync:tools
+pnpm run sync:tools
 ```
 
 #### 添加新工具
@@ -50,9 +50,9 @@ npm run sync:tools
 
 2. 在对应目录创建 HTML 文件，参考现有工具的结构
 
-3. 运行 `npm run sync:tools` 同步到首页
+3. 运行 `pnpm run sync:tools` 同步到首页
 
-4. 运行 `npm run lint` 确保代码规范
+4. 运行 `pnpm run lint` 确保代码规范
 
 #### 代码规范
 

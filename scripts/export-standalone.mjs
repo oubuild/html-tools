@@ -7,8 +7,8 @@ const ROOT = process.cwd();
 const DEFAULT_OUT_DIR = 'dist-standalone';
 
 function usage() {
-  console.error('Usage: npm run export:standalone -- <tool-html-path> [output-dir]');
-  console.error('Example: npm run export:standalone -- tools/design/aurora-generator.html');
+  console.error('Usage: pnpm run export:standalone <tool-html-path> [output-dir]');
+  console.error('Example: pnpm run export:standalone tools/design/aurora-generator.html');
 }
 
 function toPosix(filePath) {

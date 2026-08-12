@@ -9,7 +9,7 @@
  * - manifest.json: 描述中的工具数量
  * - GitHub 仓库描述
  *
- * 用法: npm run sync
+ * 用法: pnpm run sync
  */
 
 import fs from 'fs';

@@ -14,40 +14,45 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
           node-version: '20'
-          cache: 'npm'
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Build SSG
-        run: npm run build
+        run: pnpm run build
 
       - name: Run HTMLHint
-        run: npm run lint:html
+        run: pnpm run lint:html
 
       - name: Run Stylelint
-        run: npm run lint:css
+        run: pnpm run lint:css
 
       - name: Run ESLint
-        run: npm run lint:js
+        run: pnpm run lint:js
         # ESLint 配置已优化，警告不会导致失败
         # 详见 docs/LINT_WARNINGS.md
 
       - name: Run tests
-        run: npm test
+        run: pnpm test
 
       - name: Check tools sync
         run: |
-          npm run sync:tools
+          pnpm run sync:tools
           if [ -n "$(git diff --name-only index.html)" ]; then
             echo "❌ Error: index.html is out of sync with tools.json"
             echo ""
             echo "Please run locally:"
-            echo "  npm run sync:tools"
+            echo "  pnpm run sync:tools"
             echo "  git add index.html && git commit --amend --no-edit"
             echo "  git push --force-with-lease"
             echo ""

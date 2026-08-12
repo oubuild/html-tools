@@ -76,8 +76,8 @@ A good contribution path:
 1. Copy or generate a standard tool template.
 2. Implement one tool in `tools/<category>/<name>.html`.
 3. Register it in `tools.json`.
-4. Run `npm run sync`.
-5. Run `npm run lint && npm test`.
+4. Run `pnpm run sync`.
+5. Run `pnpm run lint && pnpm test`.
 
 Future improvements can include a `create:tool` script that generates the template and metadata skeleton.
 

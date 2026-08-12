@@ -9,19 +9,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## 开发命令
 
 ```bash
-npm install                # 安装 lint 工具（仅开发时需要）
-npm run lint               # 运行全部 lint（HTMLHint + Stylelint + ESLint）
-npm run lint:html          # 仅 HTMLHint
-npm run lint:css           # 仅 Stylelint
-npm run lint:js            # 仅 ESLint
-npm run lint:fix           # 自动修复 CSS 问题
-npm run format             # Prettier 格式化
-npm run format:check       # 检查格式（不修改）
-npm run sync:tools         # 将 tools.json 同步到 index.html/README/sitemap/manifest
-npm test                   # 运行测试套件（tools.json/数据质量/同步/HTML 结构/重定向）
+pnpm install                # 安装 lint 工具（仅开发时需要）
+pnpm run lint               # 运行全部 lint（HTMLHint + Stylelint + ESLint）
+pnpm run lint:html          # 仅 HTMLHint
+pnpm run lint:css           # 仅 Stylelint
+pnpm run lint:js            # 仅 ESLint
+pnpm run lint:fix           # 自动修复 CSS 问题
+pnpm run format             # Prettier 格式化
+pnpm run format:check       # 检查格式（不修改）
+pnpm run sync:tools         # 将 tools.json 同步到 index.html/README/sitemap/manifest
+pnpm test                   # 运行测试套件（tools.json/数据质量/同步/HTML 结构/重定向）
 ```
 
-**没有** `npm run build` 或 `npm start`。提交前必须通过：`npm run lint && npm run format:check && npm test`
+**没有** `pnpm run build` 或 `pnpm start`。提交前必须通过：`pnpm run lint && pnpm run format:check && pnpm test`
 
 ## 核心架构
 
@@ -38,7 +38,7 @@ npm test                   # 运行测试套件（tools.json/数据质量/同步
 
 注意：`tools` 是以数字字符串为 key 的对象（非数组）。
 
-运行 `npm run sync:tools`（即 `scripts/sync-all.js`）会同步更新：
+运行 `pnpm run sync:tools`（即 `scripts/sync-all.js`）会同步更新：
 
 - `index.html` 中的 CATEGORIES/TOOLS 数组和 SEO meta
 - `README.md` 中的工具数量
@@ -105,8 +105,8 @@ showcase 范例见 `tools/calculator/tip-calculator.html`。
 
 1. 在 `tools/<category>/` 下创建 `.html` 文件（复制 `tools/dev/json-formatter.html` 作模板，包含最新设计系统、面包屑导航、SEO Schema）
 2. 在 `tools.json` 的 `tools` 对象中添加条目（key 为下一个数字）
-3. 运行 `npm run sync:tools`
-4. 运行 `npm run lint && npm run format:check && npm test` 确认通过
+3. 运行 `pnpm run sync:tools`
+4. 运行 `pnpm run lint && pnpm run format:check && pnpm test` 确认通过
 
 ## 样式约定
 
@@ -116,11 +116,11 @@ showcase 范例见 `tools/calculator/tip-calculator.html`。
 
 ## CI/CD
 
-- PR 触发：HTMLHint + Stylelint + ESLint + Prettier check + 测试套件（`npm test`）+ tools.json 同步检查
+- PR 触发：HTMLHint + Stylelint + ESLint + Prettier check + 测试套件（`pnpm test`）+ tools.json 同步检查
 - 推送 master：自动部署到 GitHub Pages、Vercel、Netlify、Cloudflare Pages
 
 ## 常见陷阱
 
 1. **DOM 选择器**：工具卡片名称是 `.tool-name`（不是 `h3`），用 `querySelector('.tool-name')` 并做 null 检查
-2. **同步遗忘**：改了 `tools.json` 忘记 `npm run sync:tools` → CI 失败
+2. **同步遗忘**：改了 `tools.json` 忘记 `pnpm run sync:tools` → CI 失败
 3. **ESLint 误报**：HTML 内联 JS 中 `onclick` 调用的函数会被报未使用，已通过 `varsIgnorePattern: '^_'` 配置缓解

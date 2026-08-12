@@ -6,20 +6,21 @@
   "private": true,
   "scripts": {
     "dev": "node scripts/dev.mjs",
-    "build": "npm run sync && node scripts/copy-to-dist.mjs",
+    "build": "pnpm run sync && node scripts/copy-to-dist.mjs",
     "test": "node tests/run.js",
-    "lint": "npm run lint:html && npm run lint:css && npm run lint:js",
+    "lint": "pnpm run lint:html && pnpm run lint:css && pnpm run lint:js",
     "lint:html": "htmlhint \"tools/**/*.html\" --ignore \"**/ByteDanceVerify.html,**/baidu_verify_*.html,**/js-playground.html,**/code-screenshot.html,**/generator/wave-bg.html\"",
     "lint:css": "stylelint \"tools/**/*.html\" --custom-syntax postcss-html",
     "lint:js": "eslint \"tools/**/*.html\" \"assets/js/**/*.js\"",
-    "lint:fix": "npm run lint:css -- --fix",
+    "lint:fix": "pnpm run lint:css --fix",
     "format": "prettier --write \"**/*.{html,js,json,md}\"",
     "format:check": "prettier --check \"**/*.{html,js,json,md}\"",
     "export:standalone": "node scripts/export-standalone.mjs",
     "sync": "node scripts/sync-all.js",
-    "sync:tools": "npm run sync"
+    "sync:tools": "pnpm run sync"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.5",
     "eslint": "^9.39.2",
     "eslint-plugin-html": "^8.0.0",
     "htmlhint": "^1.1.4",
@@ -45,5 +46,6 @@
   "dependencies": {
     "cheerio": "^1.2.0",
     "ejs": "^6.0.1"
-  }
+  },
+  "packageManager": "pnpm@10.18.1+sha512.77a884a165cbba2d8d1c19e3b4880eee6d2fcabd0d879121e282196b80042351d5eb3ca0935fa599da1dc51265cc68816ad2bddd2a2de5ea9fdf92adbec7cd34"
 }

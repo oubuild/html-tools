@@ -13,7 +13,7 @@ const PORT = 3000;
 
 // 1. Initial Build
 console.log('🚀 [Dev] Running initial sync...');
-exec('npm run build', (err, stdout, stderr) => {
+exec('pnpm run build', (err, stdout, stderr) => {
   if (err) {
     console.error(`Build failed: ${err}`);
     return;
@@ -80,7 +80,7 @@ function startWatcher() {
       console.log(`\n🔄 [Dev] Detected change in ${filename}. Rebuilding...`);
       const startTime = Date.now();
 
-      exec('npm run build', (err, stdout, stderr) => {
+      exec('pnpm run build', (err, stdout, stderr) => {
         if (err) {
           console.error(`❌ [Dev] Build failed:`);
           console.error(stderr);
