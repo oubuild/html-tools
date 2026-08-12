@@ -41,6 +41,8 @@ function checkAll(label, predicate) {
   });
 }
 
+// BOM 字符（\uFEFF）是刻意测试：允许 <!doctype> 前带 BOM
+// eslint-disable-next-line no-irregular-whitespace
 checkAll('均以 <!doctype html> 开头', (t) => /^﻿?\s*<!doctype html>/i.test(t.head));
 checkAll('均含 <html lang="...">', (t) => /<html[^>]*\blang=/i.test(t.head));
 checkAll('均含非空 <title>', (t) => /<title>\s*[^<\s][^<]*<\/title>/i.test(t.head));
