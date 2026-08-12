@@ -30,7 +30,9 @@ export default [
       }
     },
     rules: {
-      'no-console': 'off' // 构建/测试脚本允许 console 输出
+      'no-console': 'off', // 构建/测试脚本允许 console 输出
+      // 下划线前缀参数视为有意忽略（如 exec 回调中未使用的 stdout/stderr）
+      'no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }]
     }
   },
 

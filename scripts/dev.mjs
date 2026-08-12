@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { exec, spawn } from 'child_process';
+import { exec } from 'child_process';
 import http from 'http';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -13,9 +13,9 @@ const PORT = 3000;
 
 // 1. Initial Build
 console.log('🚀 [Dev] Running initial sync...');
-exec('pnpm run build', (err, stdout, stderr) => {
-  if (err) {
-    console.error(`Build failed: ${err}`);
+exec('pnpm run build', (_err, _stdout, _stderr) => {
+  if (_err) {
+    console.error(`Build failed: ${_err}`);
     return;
   }
   console.log('✅ [Dev] Initial sync complete.');
@@ -82,10 +82,10 @@ function startWatcher() {
       console.log(`\n🔄 [Dev] Detected change in ${filename}. Rebuilding...`);
       const startTime = Date.now();
 
-      exec('pnpm run build', (err, stdout, stderr) => {
-        if (err) {
+      exec('pnpm run build', (_err, _stdout, _stderr) => {
+        if (_err) {
           console.error(`❌ [Dev] Build failed:`);
-          console.error(stderr);
+          console.error(_stderr);
           return;
         }
         console.log(`⚡ [Dev] Rebuild finished in ${Date.now() - startTime}ms.`);
