@@ -36,7 +36,9 @@ function startServer() {
   };
 
   const server = http.createServer((req, res) => {
-    let filePath = path.join(ROOT_DIR, req.url === '/' ? 'index.html' : req.url);
+    // 剥离 query string / hash（如 /?category=dev 应映射到 /index.html）
+    const pathname = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
+    let filePath = path.join(ROOT_DIR, pathname === '/' ? 'index.html' : pathname);
     if (!path.extname(filePath)) {
       filePath = path.join(filePath, 'index.html');
     }

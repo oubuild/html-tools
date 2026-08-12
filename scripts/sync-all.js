@@ -152,46 +152,109 @@ const CATEGORY_PAGE_CSS = `
         font-size: 0.8rem;
         color: var(--text-muted);
       }
-      .cat-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-        gap: var(--space-3);
-      }
-      .cat-card {
-        display: flex;
-        gap: var(--space-3);
-        padding: var(--space-4);
+      .cat-table {
         border: 1px solid var(--border-subtle);
         border-radius: var(--radius-lg);
+        overflow: hidden;
         background: var(--bg-card);
-        color: inherit;
-        text-decoration: none;
-        transition:
-          border-color var(--transition),
-          transform var(--transition);
+        contain: layout style;
       }
-      .cat-card:hover {
-        border-color: var(--accent-cyan);
-        transform: translateY(-2px);
-      }
-      .cat-card-icon {
-        flex-shrink: 0;
-        font-size: 1.5rem;
-        line-height: 1.2;
-      }
-      .cat-card-body {
-        display: flex;
-        flex-direction: column;
-        gap: 2px;
-        min-width: 0;
-      }
-      .cat-card-name {
+      .cat-table-header {
+        display: grid;
+        grid-template-columns: minmax(220px, 1.2fr) minmax(260px, 2.2fr);
+        align-items: center;
+        padding: 0 16px;
+        height: 44px;
+        background: var(--bg-surface);
+        border-bottom: 1px solid var(--border-subtle);
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
         font-weight: 600;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        user-select: none;
       }
-      .cat-card-desc {
-        font-size: 0.82rem;
-        line-height: 1.5;
+      .cat-viewport {
+        max-height: 62vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+        position: relative;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
+      }
+      .cat-spacer {
+        position: relative;
+        width: 100%;
+      }
+      .cat-row {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: var(--row-height, 52px);
+        display: grid;
+        grid-template-columns: minmax(220px, 1.2fr) minmax(260px, 2.2fr);
+        align-items: center;
+        padding: 0 16px;
+        border-bottom: 1px solid var(--border-subtle);
+        background: var(--bg-card);
+        transition: background 0.15s ease;
+        will-change: transform;
+      }
+      .cat-row:hover {
+        background: var(--bg-card-hover);
+      }
+      .cat-col {
+        min-width: 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        overflow: hidden;
+      }
+      .cat-col-desc {
+        font-size: 0.85rem;
         color: var(--text-secondary);
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        user-select: text;
+      }
+      .cat-row-link {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 0;
+        text-decoration: none;
+        color: inherit;
+      }
+      .cat-row-link .cat-icon-sm {
+        width: 30px;
+        height: 30px;
+        background: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-md);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+        flex-shrink: 0;
+        transition: all 0.3s ease;
+      }
+      .cat-row-link:hover .cat-icon-sm {
+        background: var(--accent-cyan);
+        border-color: var(--accent-cyan);
+      }
+      .cat-row-name {
+        font-family: var(--font-mono);
+        font-size: 0.88rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .cat-row-link:hover .cat-row-name {
+        color: var(--accent-cyan);
       }
       .cat-faq {
         margin-top: var(--space-10);
@@ -211,6 +274,27 @@ const CATEGORY_PAGE_CSS = `
       }
       .cat-footer a:hover {
         text-decoration: underline;
+      }
+      @media (width <= 640px) {
+        .cat-main {
+          padding-left: var(--space-3);
+          padding-right: var(--space-3);
+        }
+        .cat-table-header,
+        .cat-row {
+          grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+          padding: 0 12px;
+        }
+        .cat-viewport {
+          height: 56vh;
+          min-height: 260px;
+        }
+        .cat-row-name {
+          font-size: 0.8rem;
+        }
+        .cat-col-desc {
+          font-size: 0.78rem;
+        }
       }
 `;
 
@@ -256,18 +340,16 @@ function categoryPageHtml(catId, cat, catTools) {
     }
   };
 
-  const cards = catTools
-    .map((t) => {
-      const href = escapeAttr(relToolHref(catId, t.path));
-      return `        <a class="cat-card" href="${href}">
-          <span class="cat-card-icon">${escapeHtml(t.icon || '🔧')}</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">${escapeHtml(t.name)}</span>
-            <span class="cat-card-desc">${escapeHtml(t.description || t.name)}</span>
-          </span>
-        </a>`;
-    })
-    .join('\n');
+  // 内联工具数据：原始值进 JSON（JSON.stringify 已处理引号/反斜杠），
+  // 额外把 < 转义为 \u003c 防止 </script> 提前闭合内联脚本
+  const toolsData = catTools.map((t) => ({
+    href: relToolHref(catId, t.path),
+    icon: t.icon || '🔧',
+    name: t.name,
+    desc: t.description || t.name
+  }));
+
+  const toolsJson = JSON.stringify(toolsData).replace(/</g, '\\u003c');
 
   return `<!doctype html>
 <html lang="zh-CN">
@@ -323,13 +405,89 @@ ${toJsonLd(collection)}
         <p class="cat-intro">${escapeHtml(intro)}</p>
         <p class="cat-meta">${count} 个工具 · 纯本地运行 · 免费 · 无广告</p>
       </header>
-      <section class="cat-grid">
-${cards}
+      <section class="cat-table">
+        <div class="cat-table-header" aria-hidden="true">
+          <span class="cat-col">工具</span>
+          <span class="cat-col cat-col-desc">描述</span>
+        </div>
+        <div class="cat-viewport" id="cat-viewport" role="list" aria-label="${escapeAttr(name + '工具列表')}">
+          <div class="cat-spacer" id="cat-spacer"></div>
+        </div>
       </section>
       <footer class="cat-footer">
         <a href="../../index.html">← 返回 WebUtils 全部工具</a>
       </footer>
     </main>
+    <script src="../../assets/js/virtual-core.js"></script>
+    <script>
+      // 分类工具数据（由 sync 脚本生成）
+      const CAT_TOOLS = ${toolsJson};
+      const ROW_HEIGHT = 52;
+      const vp = document.getElementById('cat-viewport');
+      const spacer = document.getElementById('cat-spacer');
+      const rowCache = new Map();
+
+      const virtualizer = new VirtualCore.Virtualizer({
+        count: CAT_TOOLS.length,
+        getScrollElement: () => vp,
+        estimateSize: () => ROW_HEIGHT,
+        overscan: 8,
+        observeElementRect: VirtualCore.observeElementRect,
+        observeElementOffset: VirtualCore.observeElementOffset,
+        scrollToFn: VirtualCore.elementScroll,
+        getItemKey: (index) => index,
+        onChange: () => renderRows()
+      });
+
+      function createRow(tool) {
+        const row = document.createElement('div');
+        row.className = 'cat-row';
+        const link = document.createElement('a');
+        link.className = 'cat-row-link';
+        link.href = tool.href;
+        const icon = document.createElement('span');
+        icon.className = 'cat-icon-sm';
+        icon.textContent = tool.icon;
+        const name = document.createElement('span');
+        name.className = 'cat-row-name';
+        name.textContent = tool.name;
+        link.appendChild(icon);
+        link.appendChild(name);
+        const desc = document.createElement('span');
+        desc.className = 'cat-col cat-col-desc';
+        desc.textContent = tool.desc;
+        desc.title = tool.desc;
+        row.appendChild(link);
+        row.appendChild(desc);
+        return row;
+      }
+
+      function renderRows() {
+        const items = virtualizer.getVirtualItems();
+        spacer.style.height = virtualizer.getTotalSize() + 'px';
+        const liveKeys = new Set(items.map((i) => i.key));
+        for (const [key, row] of rowCache) {
+          if (!liveKeys.has(key)) {
+            row.remove();
+            rowCache.delete(key);
+          }
+        }
+        for (const item of items) {
+          let row = rowCache.get(item.key);
+          if (!row) {
+            row = createRow(CAT_TOOLS[item.index]);
+            rowCache.set(item.key, row);
+          }
+          if (!row.isConnected) {
+            spacer.appendChild(row);
+          }
+          row.style.transform = 'translateY(' + item.start + 'px)';
+        }
+      }
+
+      virtualizer._willUpdate();
+      virtualizer.measure();
+    </script>
   </body>
 </html>
 `;
@@ -338,34 +496,40 @@ ${cards}
 /**
  * 生成全部分类落地页 tools/<cat>/index.html
  * 已作为工具登记的分类首页（如 ai-coding 的手工导航页）不覆盖。
- * @returns {string[]} 生成的页面相对路径列表
+ * 幂等写入：生成内容先经 prettier 格式化，与磁盘相同则不写，
+ * 避免 dev watcher 监听 tools/ 时陷入「sync 写文件 → watcher 触发 → 再 sync」循环。
+ * @returns {Promise<string[]>} 生成的页面相对路径列表
  */
-function generateCategoryPages(categories, groupedTools, registeredPaths) {
+async function generateCategoryPages(categories, groupedTools, registeredPaths) {
+  let prettier = null;
+  try {
+    prettier = await import('prettier');
+  } catch {
+    // prettier 不可用时降级为不格式化（保持原有行为）
+  }
+
   const generated = [];
   for (const catId of Object.keys(categories)) {
     const rel = `tools/${catId}/index.html`;
     if (registeredPaths.has(rel)) continue;
     const catTools = groupedTools[catId] || [];
     if (catTools.length === 0) continue;
-    const html = categoryPageHtml(catId, categories[catId], catTools);
+    let html = categoryPageHtml(catId, categories[catId], catTools);
+
+    // 与 prettier 格式化后的产物保持一致（CI 同步检查依赖此稳定性）
+    if (prettier) {
+      try {
+        html = await prettier.format(html, { parser: 'html' });
+      } catch {
+        // 格式化失败时用原始输出
+      }
+    }
+
     const abs = path.join(ROOT_DIR, rel);
     fs.mkdirSync(path.dirname(abs), { recursive: true });
-    fs.writeFileSync(abs, html);
-    generated.push(rel);
-  }
-  // 统一用 prettier 格式化，确保与项目代码风格一致、且每次输出稳定（CI 同步检查依赖此稳定性）
-  if (generated.length > 0) {
-    try {
-      execFileSync(
-        'npx',
-        ['prettier', '--write', ...generated.map((p) => path.join(ROOT_DIR, p))],
-        {
-          encoding: 'utf8',
-          stdio: ['pipe', 'pipe', 'pipe']
-        }
-      );
-    } catch {
-      // prettier 不可用时静默失败
+    if (!fs.existsSync(abs) || fs.readFileSync(abs, 'utf8') !== html) {
+      fs.writeFileSync(abs, html);
+      generated.push(rel);
     }
   }
   console.log(`✅ 分类落地页: ${generated.length} 个`);
@@ -375,7 +539,7 @@ function generateCategoryPages(categories, groupedTools, registeredPaths) {
 /**
  * 主函数
  */
-function main() {
+async function main() {
   console.log('🔄 开始同步...\n');
 
   // 读取 tools.json
@@ -447,11 +611,11 @@ function main() {
 
   // 生成分类落地页（须在 sitemap 之前，sitemap 要纳入这些页面的 URL）
   const registeredPaths = new Set(tools.map((t) => t.path));
-  const categoryPages = generateCategoryPages(categories, groupedTools, registeredPaths);
+  const categoryPages = await generateCategoryPages(categories, groupedTools, registeredPaths);
 
   // 执行所有同步
   const results = {
-    indexHtml: updateIndexHtml(categoriesJs, toolsJs, toolCount, categoryCount),
+    indexHtml: await updateIndexHtml(categoriesJs, toolsJs, toolCount, categoryCount),
     readme: updateReadme(toolCount, categoryCount),
     sitemap: updateSitemap(tools, toolCount, categoryPages),
     manifest: updateManifest(toolCount),
@@ -487,7 +651,7 @@ function main() {
 /**
  * 更新 index.html
  */
-function updateIndexHtml(categoriesJs, toolsJs, toolCount, categoryCount) {
+async function updateIndexHtml(categoriesJs, toolsJs, toolCount, categoryCount) {
   if (!fs.existsSync(INDEX_HTML)) {
     console.error('❌ index.html not found');
     return false;
@@ -528,15 +692,19 @@ function updateIndexHtml(categoriesJs, toolsJs, toolCount, categoryCount) {
   );
 
   if (updated) {
-    fs.writeFileSync(INDEX_HTML, html);
-    // 运行 prettier 格式化，确保与项目代码风格一致
+    // 幂等写入：格式化后与磁盘比较，内容未变化则不写
+    let finalHtml = html;
     try {
-      execFileSync('npx', ['prettier', '--write', INDEX_HTML], {
-        encoding: 'utf8',
-        stdio: ['pipe', 'pipe', 'pipe']
-      });
+      const prettier = await import('prettier');
+      finalHtml = await prettier.format(html, { parser: 'html' });
     } catch {
-      // prettier 不可用时静默失败
+      // prettier 不可用时用原始输出
+    }
+    if (fs.readFileSync(INDEX_HTML, 'utf8') !== finalHtml) {
+      fs.writeFileSync(INDEX_HTML, finalHtml);
+    } else {
+      console.log('⏭️  index.html: 内容无变化');
+      return false;
     }
     console.log(`✅ index.html: ${toolCount} 工具, ${categoryCount} 分类`);
     return true;
@@ -810,4 +978,7 @@ function updateGitHubDescription(toolCount) {
   }
 }
 
-main();
+main().catch((err) => {
+  console.error('❌ 同步失败:', err);
+  process.exit(1);
+});

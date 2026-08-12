@@ -1,6 +1,7 @@
 // ==================== DOM 元素 ====================
 const searchInput = document.getElementById('search');
-const toolsGrid = document.getElementById('tools-grid');
+const toolsViewport = document.getElementById('tools-viewport');
+const toolsSpacer = document.getElementById('tools-spacer');
 const categoriesContainer = document.getElementById('categories');
 const noResults = document.getElementById('no-results');
 const themeToggle = document.getElementById('theme-toggle');
@@ -18,8 +19,76 @@ const htmlElement = document.documentElement;
 const searchResultsCount = document.getElementById('search-results-count');
 
 let currentCategory = 'all';
-let toolCards = [];
 let toolRenderOrder = [];
+
+// ==================== 虚拟列表 ====================
+const ROW_HEIGHT = 52; // 表格行高（px），固定行高保证虚拟滚动精确
+const OVERSCAN = 8;
+
+// 当前可见工具（筛选+排序后的结果），元素: { tool, index, score }
+let visibleTools = [];
+
+// 行节点池：key = 原始 TOOLS 索引，滚动时复用行避免重复创建 DOM
+const rowCache = new Map();
+
+// 虚拟列表配置（setOptions 会整体重建 options，必须全量传入）
+const VIRTUALIZER_OPTIONS = {
+  count: 0,
+  getScrollElement: () => toolsViewport,
+  estimateSize: () => ROW_HEIGHT,
+  overscan: OVERSCAN,
+  observeElementRect: VirtualCore.observeElementRect,
+  observeElementOffset: VirtualCore.observeElementOffset,
+  scrollToFn: VirtualCore.elementScroll,
+  getItemKey: (index) => visibleTools[index].index,
+  onChange: () => renderVirtualRows()
+};
+
+const virtualizer = new VirtualCore.Virtualizer(VIRTUALIZER_OPTIONS);
+
+/**
+ * 渲染可视区行（虚拟列表核心）
+ * spacer 撑起总高度，行绝对定位 translateY(start)
+ */
+function renderVirtualRows() {
+  const items = virtualizer.getVirtualItems();
+  toolsSpacer.style.height = virtualizer.getTotalSize() + 'px';
+
+  // 收集当前可视 key
+  const liveKeys = new Set();
+  for (const item of items) {
+    liveKeys.add(item.key);
+  }
+
+  // 移除不在可视区的行节点（DOM 和缓存同步清理）
+  for (const [key, row] of rowCache) {
+    if (!liveKeys.has(key)) {
+      row.remove();
+      rowCache.delete(key);
+    }
+  }
+
+  // 渲染/复用可视区行
+  for (const item of items) {
+    let row = rowCache.get(item.key);
+    if (!row) {
+      const vt = visibleTools[item.index];
+      row = createToolRow(vt.tool, vt.index);
+      rowCache.set(item.key, row);
+    }
+    if (!row.isConnected) {
+      toolsSpacer.appendChild(row);
+    }
+    row.style.transform = 'translateY(' + item.start + 'px)';
+  }
+}
+
+/** 数据层筛选 + 排序，然后让虚拟列表渲染 */
+function refreshVirtualList() {
+  // setOptions 会整体重建 options（默认值 + 传入项），必须全量传入
+  virtualizer.setOptions({ ...VIRTUALIZER_OPTIONS, count: visibleTools.length });
+  virtualizer.measure();
+}
 
 const CATEGORY_PARAM = 'category';
 
@@ -144,10 +213,8 @@ function updateToolRenderOrder() {
 
 function refreshToolsAfterFavoriteChange() {
   updateToolRenderOrder();
-  // 只在当前处于收藏分类时刷新，避免在正常浏览时因全量重建DOM导致焦点丢失和视口跳动
-  if (currentCategory === 'favorites') {
-    filterTools();
-  }
+  // 收藏状态变化会影响排序（收藏置顶）与收藏分类集合，数据层重建一次即可
+  filterTools();
 }
 
 function toggleFavorite(url, btn, event) {
@@ -215,37 +282,57 @@ function renderCategories() {
   });
 }
 
-// ==================== 渲染工具卡片 ====================
-let renderedCount = 0;
+// ==================== 渲染工具行（表格） ====================
 
-function createToolCard(tool, index) {
-  const card = document.createElement('a');
-  card.href = tool.url;
-  card.className = 'tool-card';
-  card.dataset.category = tool.category;
-  card.dataset.keywords = tool.keywords;
-  card.dataset.index = index; // 存储原始TOOLS索引，用于搜索排序后保持正确关联
-  // 只对前20个卡片添加动画延迟
-  if (index < 20) {
-    card.style.animationDelay = index * 0.02 + 's';
-  }
+/**
+ * 创建单个表格行（虚拟列表用）
+ * 结构: [图标+名称] [描述] [分类tag] [收藏按钮]
+ */
+function createToolRow(tool, index) {
+  const row = document.createElement('div');
+  row.className = 'tools-row';
+  row.dataset.category = tool.category;
+  row.dataset.keywords = tool.keywords;
+  row.dataset.index = index; // 原始 TOOLS 索引
 
-  const header = document.createElement('div');
-  header.className = 'tool-card-header';
+  // 列1: 图标 + 名称（链接）
+  const nameCol = document.createElement('span');
+  nameCol.className = 'tt-col tt-col-name';
 
-  const titleGroup = document.createElement('div');
-  titleGroup.className = 'tool-title-group';
+  const link = document.createElement('a');
+  link.href = tool.url;
+  link.className = 'tool-link';
+  link.setAttribute('aria-label', tool.name);
 
-  const iconDiv = document.createElement('div');
-  iconDiv.className = 'tool-icon';
-  iconDiv.textContent = tool.icon;
+  const iconSpan = document.createElement('span');
+  iconSpan.className = 'tool-icon';
+  iconSpan.textContent = tool.icon;
 
-  const h3 = document.createElement('h3');
-  h3.textContent = tool.name;
+  const nameSpan = document.createElement('span');
+  nameSpan.className = 'tool-name';
+  nameSpan.textContent = tool.name;
 
-  titleGroup.appendChild(iconDiv);
-  titleGroup.appendChild(h3);
+  link.appendChild(iconSpan);
+  link.appendChild(nameSpan);
+  nameCol.appendChild(link);
 
+  // 列2: 描述
+  const descCol = document.createElement('span');
+  descCol.className = 'tt-col tt-col-desc';
+  descCol.textContent = tool.desc;
+  descCol.title = tool.desc;
+
+  // 列3: 分类 tag
+  const catCol = document.createElement('span');
+  catCol.className = 'tt-col tt-col-cat';
+  const tag = document.createElement('span');
+  tag.className = 'tool-tag';
+  tag.textContent = tool.category;
+  catCol.appendChild(tag);
+
+  // 列4: 收藏按钮
+  const favCol = document.createElement('span');
+  favCol.className = 'tt-col tt-col-fav';
   const favBtn = document.createElement('button');
   favBtn.className = 'favorite-btn' + (isFavorite(tool.url) ? ' active' : '');
   favBtn.type = 'button';
@@ -260,59 +347,14 @@ function createToolCard(tool, index) {
       toggleFavorite(tool.url, favBtn, e);
     }
   });
+  favCol.appendChild(favBtn);
 
-  header.appendChild(titleGroup);
-  header.appendChild(favBtn);
+  row.appendChild(nameCol);
+  row.appendChild(descCol);
+  row.appendChild(catCol);
+  row.appendChild(favCol);
 
-  const desc = document.createElement('p');
-  desc.textContent = tool.desc;
-
-  const footer = document.createElement('div');
-  footer.className = 'tool-card-footer';
-
-  const tag = document.createElement('span');
-  tag.className = 'tool-tag';
-  tag.textContent = tool.category;
-
-  const arrow = document.createElement('span');
-  arrow.className = 'tool-arrow';
-  arrow.textContent = '→';
-
-  footer.appendChild(tag);
-  footer.appendChild(arrow);
-
-  card.appendChild(header);
-  card.appendChild(desc);
-  card.appendChild(footer);
-
-  return card;
-}
-
-function renderTools() {
-  renderedCount = 0;
-  toolsGrid.innerHTML = ''; // 清空现有内容
-
-  // 一次性渲染全部工具卡片（懒加载分批方案在返回首页场景下会卡在部分数量，
-  // 且分类切换/搜索时 filterTools 本就会全量重建，全量渲染已验证性能可接受）
-  const fragment = document.createDocumentFragment();
-  const end = TOOLS.length;
-
-  for (let i = 0; i < end; i++) {
-    const toolIndex = toolRenderOrder[i];
-    fragment.appendChild(createToolCard(TOOLS[toolIndex], toolIndex));
-  }
-
-  toolsGrid.appendChild(fragment);
-  renderedCount = end;
-
-  // 清理可能存在的懒加载触发器残留
-  const loadTrigger = document.getElementById('load-trigger');
-  if (loadTrigger) {
-    loadTrigger.remove();
-  }
-
-  // 立即更新卡片引用（用于过滤）
-  toolCards = document.querySelectorAll('.tool-card');
+  return row;
 }
 
 // ==================== 增强搜索功能 ====================
@@ -592,97 +634,66 @@ function getSearchScore(tool, query) {
   return score;
 }
 
-// ==================== 过滤工具 ====================
+// ==================== 过滤工具（数据层） ====================
 function filterTools() {
-  // 每次过滤前强制加载所有工具卡片
-  if (renderedCount < TOOLS.length) {
-    // 一次性渲染所有剩余工具
-    const fragment = document.createDocumentFragment();
-    for (let i = renderedCount; i < TOOLS.length; i++) {
-      const toolIndex = toolRenderOrder[i];
-      fragment.appendChild(createToolCard(TOOLS[toolIndex], toolIndex));
-    }
-    toolsGrid.appendChild(fragment);
-    renderedCount = TOOLS.length;
-    // 移除懒加载触发器
-    const loadTrigger = document.getElementById('load-trigger');
-    if (loadTrigger) loadTrigger.remove();
-  }
-
-  // 每次过滤时重新获取卡片引用，确保索引同步
-  toolCards = document.querySelectorAll('.tool-card');
-
   const query = searchInput.value.toLowerCase().trim();
-  let visibleCount = 0;
 
-  // 计算搜索评分并排序
-  const toolsWithScores = [];
-
-  toolCards.forEach((card) => {
-    // 使用存储的原始索引而不是DOM迭代索引，避免排序后索引错乱
-    const toolIndex = parseInt(card.dataset.index, 10);
-    const tool = TOOLS[toolIndex];
+  // 数据层筛选：不操作任何 DOM，1088 个工具纯 JS 计算毫秒级完成
+  const matched = [];
+  for (let i = 0; i < TOOLS.length; i++) {
+    const tool = TOOLS[i];
     const matchesCategory =
       currentCategory === 'all' ||
       (currentCategory === 'favorites' && isFavorite(tool.url)) ||
       tool.category === currentCategory;
 
+    if (!matchesCategory) continue;
+
     let matchesSearch = !query;
     let searchScore = 0;
 
-    if (query && matchesCategory) {
+    if (query) {
       searchScore = getSearchScore(tool, query);
       matchesSearch = searchScore > 0;
     }
 
-    if (matchesCategory && matchesSearch) {
-      card.classList.remove('hidden');
-      visibleCount++;
-      if (query) {
-        toolsWithScores.push({
-          card,
-          score: searchScore,
-          toolIndex,
-          isFav: isFavorite(tool.url)
-        });
-      }
-    } else {
-      card.classList.add('hidden');
+    if (matchesSearch) {
+      matched.push({
+        tool,
+        index: i,
+        score: searchScore,
+        isFav: isFavorite(tool.url)
+      });
     }
-  });
+  }
 
-  // 如果有搜索词，按评分重新排序卡片
-  if (query && toolsWithScores.length > 0) {
-    toolsWithScores.sort((a, b) => {
-      if (a.isFav !== b.isFav) {
-        return a.isFav ? -1 : 1;
-      }
-      if (a.score !== b.score) {
-        return b.score - a.score;
-      }
-      return a.toolIndex - b.toolIndex;
+  // 排序：有搜索词按评分（收藏优先），无搜索词按渲染顺序（收藏优先）
+  if (query) {
+    matched.sort((a, b) => {
+      if (a.isFav !== b.isFav) return a.isFav ? -1 : 1;
+      if (a.score !== b.score) return b.score - a.score;
+      return a.index - b.index;
     });
-    toolsWithScores.forEach(({ card }) => {
-      toolsGrid.appendChild(card);
-    });
-  } else if (!query && renderedCount === TOOLS.length) {
-    // 清除搜索词或切换分类时，恢复到原始分类/收藏顺序
-    const cardsByIndex = {};
-    toolCards.forEach((card) => {
-      cardsByIndex[card.dataset.index] = card;
-    });
-    toolRenderOrder.forEach((toolIndex) => {
-      const card = cardsByIndex[toolIndex];
-      if (card) {
-        toolsGrid.appendChild(card);
-      }
+  } else {
+    const orderMap = new Map();
+    toolRenderOrder.forEach((origIndex, pos) => orderMap.set(origIndex, pos));
+    matched.sort((a, b) => {
+      if (a.isFav !== b.isFav) return a.isFav ? -1 : 1;
+      return (orderMap.get(a.index) ?? 0) - (orderMap.get(b.index) ?? 0);
     });
   }
 
+  visibleTools = matched;
+
+  // 清空行缓存（数据集合变化，旧行 key 可能错位）
+  rowCache.forEach((row) => row.remove());
+  rowCache.clear();
+
+  // 无结果提示
   const noResultsIcon = noResults.querySelector('.no-results-icon');
   const noResultsText = noResults.querySelector('p');
 
-  if (visibleCount === 0) {
+  if (visibleTools.length === 0) {
     if (currentCategory === 'favorites' && !query) {
       noResultsIcon.textContent = '⭐';
       noResultsText.textContent = '还没有收藏的工具';
@@ -696,10 +707,13 @@ function filterTools() {
   }
 
   if (query || currentCategory !== 'all') {
-    searchResultsCount.textContent = visibleCount > 0 ? '找到 ' + visibleCount + ' 个工具' : '';
+    searchResultsCount.textContent =
+      visibleTools.length > 0 ? '找到 ' + visibleTools.length + ' 个工具' : '';
   } else {
     searchResultsCount.textContent = '';
   }
+
+  refreshVirtualList();
 }
 
 // ==================== 事件绑定 ====================
@@ -779,8 +793,8 @@ function setupCategoriesExpand() {
 currentCategory = getCategoryFromUrl();
 updateToolRenderOrder();
 renderCategories();
-renderTools();
-if (currentCategory !== 'all') {
-  filterTools();
-}
+// 初始化虚拟列表：首次 measure 后由 onChange 渲染
+virtualizer._willUpdate();
+virtualizer.measure();
+filterTools();
 setupCategoriesExpand();

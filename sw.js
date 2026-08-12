@@ -1,5 +1,5 @@
 // Service Worker for WebUtils PWA
-const CACHE_NAME = 'webutils-v4';
+const CACHE_NAME = 'webutils-v5';
 const OFFLINE_URL = './offline.html';
 
 // Assets to cache immediately on install
@@ -14,6 +14,7 @@ const PRECACHE_ASSETS = [
   './manifest.json',
   './assets/css/main.css',
   './assets/js/main.js',
+  './assets/js/virtual-core.js',
   './assets/css/tool-base.css',
   './assets/js/tool-chrome.js'
 ];

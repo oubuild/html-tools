@@ -2,7 +2,10 @@
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
     <title>财务工具 - 在线工具合集（21个）| WebUtils</title>
     <meta
       name="description"
@@ -11,24 +14,42 @@
     <meta name="keywords" content="财务工具,在线工具,免费工具,财务工具大全" />
     <meta name="author" content="WebUtils" />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://tools.realtime-ai.chat/tools/finance/index.html" />
-    <meta property="og:title" content="财务工具 - 在线工具合集（21个）| WebUtils" />
+    <link
+      rel="canonical"
+      href="https://tools.realtime-ai.chat/tools/finance/index.html"
+    />
+    <meta
+      property="og:title"
+      content="财务工具 - 在线工具合集（21个）| WebUtils"
+    />
     <meta
       property="og:description"
       content="个人与企业财务相关的在线工具，包括贷款、税务、投资、汇率、预算计算，辅助理财决策。"
     />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://tools.realtime-ai.chat/tools/finance/index.html" />
+    <meta
+      property="og:url"
+      content="https://tools.realtime-ai.chat/tools/finance/index.html"
+    />
     <meta property="og:site_name" content="WebUtils" />
     <meta property="og:locale" content="zh_CN" />
-    <meta property="og:image" content="https://tools.realtime-ai.chat/social-preview.png" />
+    <meta
+      property="og:image"
+      content="https://tools.realtime-ai.chat/social-preview.png"
+    />
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="财务工具 - 在线工具合集（21个）| WebUtils" />
+    <meta
+      name="twitter:title"
+      content="财务工具 - 在线工具合集（21个）| WebUtils"
+    />
     <meta
       name="twitter:description"
       content="个人与企业财务相关的在线工具，包括贷款、税务、投资、汇率、预算计算，辅助理财决策。"
     />
-    <meta name="twitter:image" content="https://tools.realtime-ai.chat/social-preview.png" />
+    <meta
+      name="twitter:image"
+      content="https://tools.realtime-ai.chat/social-preview.png"
+    />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -211,7 +232,8 @@
       .cat-main {
         max-width: 1100px;
         margin: 0 auto;
-        padding: calc(var(--nav-height) + var(--space-6)) var(--space-5) var(--space-10);
+        padding: calc(var(--nav-height) + var(--space-6)) var(--space-5)
+          var(--space-10);
       }
       .cat-hero {
         text-align: center;
@@ -237,46 +259,109 @@
         font-size: 0.8rem;
         color: var(--text-muted);
       }
-      .cat-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-        gap: var(--space-3);
-      }
-      .cat-card {
-        display: flex;
-        gap: var(--space-3);
-        padding: var(--space-4);
+      .cat-table {
         border: 1px solid var(--border-subtle);
         border-radius: var(--radius-lg);
+        overflow: hidden;
         background: var(--bg-card);
-        color: inherit;
-        text-decoration: none;
-        transition:
-          border-color var(--transition),
-          transform var(--transition);
+        contain: layout style;
       }
-      .cat-card:hover {
-        border-color: var(--accent-cyan);
-        transform: translateY(-2px);
-      }
-      .cat-card-icon {
-        flex-shrink: 0;
-        font-size: 1.5rem;
-        line-height: 1.2;
-      }
-      .cat-card-body {
-        display: flex;
-        flex-direction: column;
-        gap: 2px;
-        min-width: 0;
-      }
-      .cat-card-name {
+      .cat-table-header {
+        display: grid;
+        grid-template-columns: minmax(220px, 1.2fr) minmax(260px, 2.2fr);
+        align-items: center;
+        padding: 0 16px;
+        height: 44px;
+        background: var(--bg-surface);
+        border-bottom: 1px solid var(--border-subtle);
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
         font-weight: 600;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        user-select: none;
       }
-      .cat-card-desc {
-        font-size: 0.82rem;
-        line-height: 1.5;
+      .cat-viewport {
+        max-height: 62vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+        position: relative;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
+      }
+      .cat-spacer {
+        position: relative;
+        width: 100%;
+      }
+      .cat-row {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: var(--row-height, 52px);
+        display: grid;
+        grid-template-columns: minmax(220px, 1.2fr) minmax(260px, 2.2fr);
+        align-items: center;
+        padding: 0 16px;
+        border-bottom: 1px solid var(--border-subtle);
+        background: var(--bg-card);
+        transition: background 0.15s ease;
+        will-change: transform;
+      }
+      .cat-row:hover {
+        background: var(--bg-card-hover);
+      }
+      .cat-col {
+        min-width: 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        overflow: hidden;
+      }
+      .cat-col-desc {
+        font-size: 0.85rem;
         color: var(--text-secondary);
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        user-select: text;
+      }
+      .cat-row-link {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 0;
+        text-decoration: none;
+        color: inherit;
+      }
+      .cat-row-link .cat-icon-sm {
+        width: 30px;
+        height: 30px;
+        background: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-md);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+        flex-shrink: 0;
+        transition: all 0.3s ease;
+      }
+      .cat-row-link:hover .cat-icon-sm {
+        background: var(--accent-cyan);
+        border-color: var(--accent-cyan);
+      }
+      .cat-row-name {
+        font-family: var(--font-mono);
+        font-size: 0.88rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .cat-row-link:hover .cat-row-name {
+        color: var(--accent-cyan);
       }
       .cat-faq {
         margin-top: var(--space-10);
@@ -297,15 +382,54 @@
       .cat-footer a:hover {
         text-decoration: underline;
       }
+      @media (width <= 640px) {
+        .cat-main {
+          padding-left: var(--space-3);
+          padding-right: var(--space-3);
+        }
+        .cat-table-header,
+        .cat-row {
+          grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+          padding: 0 12px;
+        }
+        .cat-viewport {
+          height: 56vh;
+          min-height: 260px;
+        }
+        .cat-row-name {
+          font-size: 0.8rem;
+        }
+        .cat-col-desc {
+          font-size: 0.78rem;
+        }
+      }
     </style>
     <!-- PWA -->
     <link rel="manifest" href="../../manifest.json" />
     <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
-    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../../favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../../favicon-16x16.png"
+    />
     <link rel="apple-touch-icon" href="../../apple-touch-icon.png" />
-    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)" />
+    <meta
+      name="theme-color"
+      content="#ffffff"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#1a1a1a"
+      media="(prefers-color-scheme: dark)"
+    />
     <script src="../../assets/js/tool-chrome.js"></script>
   </head>
   <body>
@@ -318,175 +442,220 @@
         </p>
         <p class="cat-meta">21 个工具 · 纯本地运行 · 免费 · 无广告</p>
       </header>
-      <section class="cat-grid">
-        <a class="cat-card" href="stock-calculator.html">
-          <span class="cat-card-icon">📈</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">股票收益计算器</span>
-            <span class="cat-card-desc">计算股票投资盈亏、成本均价和收益率</span>
-          </span>
-        </a>
-        <a class="cat-card" href="currency-converter.html">
-          <span class="cat-card-icon">💱</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">汇率换算器</span>
-            <span class="cat-card-desc">多种货币实时汇率换算</span>
-          </span>
-        </a>
-        <a class="cat-card" href="tax-calculator.html">
-          <span class="cat-card-icon">💰</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">个人所得税计算器</span>
-            <span class="cat-card-desc">计算中国个人所得税</span>
-          </span>
-        </a>
-        <a class="cat-card" href="budget-planner.html">
-          <span class="cat-card-icon">📊</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">家庭预算规划器</span>
-            <span class="cat-card-desc">合理规划收支，实现财务自由</span>
-          </span>
-        </a>
-        <a class="cat-card" href="investment-return.html">
-          <span class="cat-card-icon">📊</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">投资回报率计算器</span>
-            <span class="cat-card-desc">计算ROI、年化收益率等投资指标</span>
-          </span>
-        </a>
-        <a class="cat-card" href="debt-payoff.html">
-          <span class="cat-card-icon">💳</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">债务还款计算器</span>
-            <span class="cat-card-desc">制定债务还款计划，比较还款策略</span>
-          </span>
-        </a>
-        <a class="cat-card" href="retirement-calculator.html">
-          <span class="cat-card-icon">🏖️</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">退休计算器</span>
-            <span class="cat-card-desc">计算退休所需资金和储蓄计划</span>
-          </span>
-        </a>
-        <a class="cat-card" href="profit-margin.html">
-          <span class="cat-card-icon">💵</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">利润率计算器</span>
-            <span class="cat-card-desc">计算毛利率、净利率、盈亏平衡点</span>
-          </span>
-        </a>
-        <a class="cat-card" href="tip-calculator.html">
-          <span class="cat-card-icon">🍽️</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">小费计算器</span>
-            <span class="cat-card-desc">快速计算餐厅小费和AA账单</span>
-          </span>
-        </a>
-        <a class="cat-card" href="exchange-split.html">
-          <span class="cat-card-icon">🧾</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">AA记账分摊器</span>
-            <span class="cat-card-desc">聚餐、旅行费用分摊计算</span>
-          </span>
-        </a>
-        <a class="cat-card" href="savings-goal.html">
-          <span class="cat-card-icon">🎯</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">储蓄目标计算器</span>
-            <span class="cat-card-desc">设定目标，计算每月储蓄金额</span>
-          </span>
-        </a>
-        <a class="cat-card" href="depreciation.html">
-          <span class="cat-card-icon">📉</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">资产折旧计算器</span>
-            <span class="cat-card-desc">计算固定资产折旧</span>
-          </span>
-        </a>
-        <a class="cat-card" href="loan-early-repay.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">提前还贷计算器</span>
-            <span class="cat-card-desc">计算提前还贷节省的利息</span>
-          </span>
-        </a>
-        <a class="cat-card" href="compound-interest.html">
-          <span class="cat-card-icon">💰</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">复利投资计算器</span>
-            <span class="cat-card-desc">计算复利投资收益，模拟长期理财规划</span>
-          </span>
-        </a>
-        <a class="cat-card" href="budget-tracker.html">
-          <span class="cat-card-icon">💰</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">预算追踪器</span>
-            <span class="cat-card-desc">记录收支，管理预算，可视化财务状况</span>
-          </span>
-        </a>
-        <a class="cat-card" href="swift-bic-lookup.html">
-          <span class="cat-card-icon">🏦</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">SWIFT / BIC 银行代码查询</span>
-            <span class="cat-card-desc">
-              查询 SWIFT/BIC
-              银行识别代码的结构（8位或11位）含义，解析银行名称、国家、城市和分行代码。
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="dividend-pe-calculator.html">
-          <span class="cat-card-icon">📈</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">股息率 / 市盈率计算器</span>
-            <span class="cat-card-desc">
-              根据股价、每股收益、每股股息，计算市盈率（P/E）、股息率（Dividend
-              Yield）、股息支付率等核心估值指标。
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="amortization-table.html">
-          <span class="cat-card-icon">🏦</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">贷款摊销明细表</span>
-            <span class="cat-card-desc">
-              输入贷款金额、年利率、期数，生成完整的逐期还款明细（本金/利息/余额），支持导出 CSV
-              和额外还款模拟。
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="cagr-calculator.html">
-          <span class="cat-card-icon">📈</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">CAGR 复合年增长率计算器</span>
-            <span class="cat-card-desc">
-              输入初始值、终值和年数，计算
-              CAGR；或由目标增长率反推所需终值，广泛用于投资和业务分析。
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="budget-50-30-20-planner.html">
-          <span class="cat-card-icon">💰</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">50/30/20 预算规划器</span>
-            <span class="cat-card-desc">
-              按 50% 必要支出、30% 想要支出、20%
-              储蓄/还债的经典法则，输入税后收入即可自动分配并可视化。
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="payback-period-calculator.html">
-          <span class="cat-card-icon">💰</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">投资回收期计算器</span>
-            <span class="cat-card-desc">
-              输入初始投资和年度净现金流（可逐年不同），计算静态和动态回收期，含图表展示累计现金流。
-            </span>
-          </span>
-        </a>
+      <section class="cat-table">
+        <div class="cat-table-header" aria-hidden="true">
+          <span class="cat-col">工具</span>
+          <span class="cat-col cat-col-desc">描述</span>
+        </div>
+        <div
+          class="cat-viewport"
+          id="cat-viewport"
+          role="list"
+          aria-label="财务工具工具列表"
+        >
+          <div class="cat-spacer" id="cat-spacer"></div>
+        </div>
       </section>
       <footer class="cat-footer">
         <a href="../../index.html">← 返回 WebUtils 全部工具</a>
       </footer>
     </main>
+    <script src="../../assets/js/virtual-core.js"></script>
+    <script>
+      // 分类工具数据（由 sync 脚本生成）
+      const CAT_TOOLS = [
+        {
+          href: "stock-calculator.html",
+          icon: "📈",
+          name: "股票收益计算器",
+          desc: "计算股票投资盈亏、成本均价和收益率",
+        },
+        {
+          href: "currency-converter.html",
+          icon: "💱",
+          name: "汇率换算器",
+          desc: "多种货币实时汇率换算",
+        },
+        {
+          href: "tax-calculator.html",
+          icon: "💰",
+          name: "个人所得税计算器",
+          desc: "计算中国个人所得税",
+        },
+        {
+          href: "budget-planner.html",
+          icon: "📊",
+          name: "家庭预算规划器",
+          desc: "合理规划收支，实现财务自由",
+        },
+        {
+          href: "investment-return.html",
+          icon: "📊",
+          name: "投资回报率计算器",
+          desc: "计算ROI、年化收益率等投资指标",
+        },
+        {
+          href: "debt-payoff.html",
+          icon: "💳",
+          name: "债务还款计算器",
+          desc: "制定债务还款计划，比较还款策略",
+        },
+        {
+          href: "retirement-calculator.html",
+          icon: "🏖️",
+          name: "退休计算器",
+          desc: "计算退休所需资金和储蓄计划",
+        },
+        {
+          href: "profit-margin.html",
+          icon: "💵",
+          name: "利润率计算器",
+          desc: "计算毛利率、净利率、盈亏平衡点",
+        },
+        {
+          href: "tip-calculator.html",
+          icon: "🍽️",
+          name: "小费计算器",
+          desc: "快速计算餐厅小费和AA账单",
+        },
+        {
+          href: "exchange-split.html",
+          icon: "🧾",
+          name: "AA记账分摊器",
+          desc: "聚餐、旅行费用分摊计算",
+        },
+        {
+          href: "savings-goal.html",
+          icon: "🎯",
+          name: "储蓄目标计算器",
+          desc: "设定目标，计算每月储蓄金额",
+        },
+        {
+          href: "depreciation.html",
+          icon: "📉",
+          name: "资产折旧计算器",
+          desc: "计算固定资产折旧",
+        },
+        {
+          href: "loan-early-repay.html",
+          icon: "🔧",
+          name: "提前还贷计算器",
+          desc: "计算提前还贷节省的利息",
+        },
+        {
+          href: "compound-interest.html",
+          icon: "💰",
+          name: "复利投资计算器",
+          desc: "计算复利投资收益，模拟长期理财规划",
+        },
+        {
+          href: "budget-tracker.html",
+          icon: "💰",
+          name: "预算追踪器",
+          desc: "记录收支，管理预算，可视化财务状况",
+        },
+        {
+          href: "swift-bic-lookup.html",
+          icon: "🏦",
+          name: "SWIFT / BIC 银行代码查询",
+          desc: "查询 SWIFT/BIC 银行识别代码的结构（8位或11位）含义，解析银行名称、国家、城市和分行代码。",
+        },
+        {
+          href: "dividend-pe-calculator.html",
+          icon: "📈",
+          name: "股息率 / 市盈率计算器",
+          desc: "根据股价、每股收益、每股股息，计算市盈率（P/E）、股息率（Dividend Yield）、股息支付率等核心估值指标。",
+        },
+        {
+          href: "amortization-table.html",
+          icon: "🏦",
+          name: "贷款摊销明细表",
+          desc: "输入贷款金额、年利率、期数，生成完整的逐期还款明细（本金/利息/余额），支持导出 CSV 和额外还款模拟。",
+        },
+        {
+          href: "cagr-calculator.html",
+          icon: "📈",
+          name: "CAGR 复合年增长率计算器",
+          desc: "输入初始值、终值和年数，计算 CAGR；或由目标增长率反推所需终值，广泛用于投资和业务分析。",
+        },
+        {
+          href: "budget-50-30-20-planner.html",
+          icon: "💰",
+          name: "50/30/20 预算规划器",
+          desc: "按 50% 必要支出、30% 想要支出、20% 储蓄/还债的经典法则，输入税后收入即可自动分配并可视化。",
+        },
+        {
+          href: "payback-period-calculator.html",
+          icon: "💰",
+          name: "投资回收期计算器",
+          desc: "输入初始投资和年度净现金流（可逐年不同），计算静态和动态回收期，含图表展示累计现金流。",
+        },
+      ];
+      const ROW_HEIGHT = 52;
+      const vp = document.getElementById("cat-viewport");
+      const spacer = document.getElementById("cat-spacer");
+      const rowCache = new Map();
+
+      const virtualizer = new VirtualCore.Virtualizer({
+        count: CAT_TOOLS.length,
+        getScrollElement: () => vp,
+        estimateSize: () => ROW_HEIGHT,
+        overscan: 8,
+        observeElementRect: VirtualCore.observeElementRect,
+        observeElementOffset: VirtualCore.observeElementOffset,
+        scrollToFn: VirtualCore.elementScroll,
+        getItemKey: (index) => index,
+        onChange: () => renderRows(),
+      });
+
+      function createRow(tool) {
+        const row = document.createElement("div");
+        row.className = "cat-row";
+        const link = document.createElement("a");
+        link.className = "cat-row-link";
+        link.href = tool.href;
+        const icon = document.createElement("span");
+        icon.className = "cat-icon-sm";
+        icon.textContent = tool.icon;
+        const name = document.createElement("span");
+        name.className = "cat-row-name";
+        name.textContent = tool.name;
+        link.appendChild(icon);
+        link.appendChild(name);
+        const desc = document.createElement("span");
+        desc.className = "cat-col cat-col-desc";
+        desc.textContent = tool.desc;
+        desc.title = tool.desc;
+        row.appendChild(link);
+        row.appendChild(desc);
+        return row;
+      }
+
+      function renderRows() {
+        const items = virtualizer.getVirtualItems();
+        spacer.style.height = virtualizer.getTotalSize() + "px";
+        const liveKeys = new Set(items.map((i) => i.key));
+        for (const [key, row] of rowCache) {
+          if (!liveKeys.has(key)) {
+            row.remove();
+            rowCache.delete(key);
+          }
+        }
+        for (const item of items) {
+          let row = rowCache.get(item.key);
+          if (!row) {
+            row = createRow(CAT_TOOLS[item.index]);
+            rowCache.set(item.key, row);
+          }
+          if (!row.isConnected) {
+            spacer.appendChild(row);
+          }
+          row.style.transform = "translateY(" + item.start + "px)";
+        }
+      }
+
+      virtualizer._willUpdate();
+      virtualizer.measure();
+    </script>
   </body>
 </html>

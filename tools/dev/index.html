@@ -2,7 +2,10 @@
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
     <title>开发工具 - 在线工具合集（205个）| WebUtils</title>
     <meta
       name="description"
@@ -11,24 +14,42 @@
     <meta name="keywords" content="开发工具,在线工具,免费工具,开发工具大全" />
     <meta name="author" content="WebUtils" />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://tools.realtime-ai.chat/tools/dev/index.html" />
-    <meta property="og:title" content="开发工具 - 在线工具合集（205个）| WebUtils" />
+    <link
+      rel="canonical"
+      href="https://tools.realtime-ai.chat/tools/dev/index.html"
+    />
+    <meta
+      property="og:title"
+      content="开发工具 - 在线工具合集（205个）| WebUtils"
+    />
     <meta
       property="og:description"
       content="面向程序员的在线开发工具集合，涵盖 JSON、Base64、正则、JWT、哈希、编码转换等高频需求。所有处理在浏览器本地完成，无需安装、不上传数据。"
     />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://tools.realtime-ai.chat/tools/dev/index.html" />
+    <meta
+      property="og:url"
+      content="https://tools.realtime-ai.chat/tools/dev/index.html"
+    />
     <meta property="og:site_name" content="WebUtils" />
     <meta property="og:locale" content="zh_CN" />
-    <meta property="og:image" content="https://tools.realtime-ai.chat/social-preview.png" />
+    <meta
+      property="og:image"
+      content="https://tools.realtime-ai.chat/social-preview.png"
+    />
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="开发工具 - 在线工具合集（205个）| WebUtils" />
+    <meta
+      name="twitter:title"
+      content="开发工具 - 在线工具合集（205个）| WebUtils"
+    />
     <meta
       name="twitter:description"
       content="面向程序员的在线开发工具集合，涵盖 JSON、Base64、正则、JWT、哈希、编码转换等高频需求。所有处理在浏览器本地完成，无需安装、不上传数据。"
     />
-    <meta name="twitter:image" content="https://tools.realtime-ai.chat/social-preview.png" />
+    <meta
+      name="twitter:image"
+      content="https://tools.realtime-ai.chat/social-preview.png"
+    />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -1315,7 +1336,8 @@
       .cat-main {
         max-width: 1100px;
         margin: 0 auto;
-        padding: calc(var(--nav-height) + var(--space-6)) var(--space-5) var(--space-10);
+        padding: calc(var(--nav-height) + var(--space-6)) var(--space-5)
+          var(--space-10);
       }
       .cat-hero {
         text-align: center;
@@ -1341,46 +1363,109 @@
         font-size: 0.8rem;
         color: var(--text-muted);
       }
-      .cat-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-        gap: var(--space-3);
-      }
-      .cat-card {
-        display: flex;
-        gap: var(--space-3);
-        padding: var(--space-4);
+      .cat-table {
         border: 1px solid var(--border-subtle);
         border-radius: var(--radius-lg);
+        overflow: hidden;
         background: var(--bg-card);
-        color: inherit;
-        text-decoration: none;
-        transition:
-          border-color var(--transition),
-          transform var(--transition);
+        contain: layout style;
       }
-      .cat-card:hover {
-        border-color: var(--accent-cyan);
-        transform: translateY(-2px);
-      }
-      .cat-card-icon {
-        flex-shrink: 0;
-        font-size: 1.5rem;
-        line-height: 1.2;
-      }
-      .cat-card-body {
-        display: flex;
-        flex-direction: column;
-        gap: 2px;
-        min-width: 0;
-      }
-      .cat-card-name {
+      .cat-table-header {
+        display: grid;
+        grid-template-columns: minmax(220px, 1.2fr) minmax(260px, 2.2fr);
+        align-items: center;
+        padding: 0 16px;
+        height: 44px;
+        background: var(--bg-surface);
+        border-bottom: 1px solid var(--border-subtle);
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
         font-weight: 600;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        user-select: none;
       }
-      .cat-card-desc {
-        font-size: 0.82rem;
-        line-height: 1.5;
+      .cat-viewport {
+        max-height: 62vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+        position: relative;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
+      }
+      .cat-spacer {
+        position: relative;
+        width: 100%;
+      }
+      .cat-row {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: var(--row-height, 52px);
+        display: grid;
+        grid-template-columns: minmax(220px, 1.2fr) minmax(260px, 2.2fr);
+        align-items: center;
+        padding: 0 16px;
+        border-bottom: 1px solid var(--border-subtle);
+        background: var(--bg-card);
+        transition: background 0.15s ease;
+        will-change: transform;
+      }
+      .cat-row:hover {
+        background: var(--bg-card-hover);
+      }
+      .cat-col {
+        min-width: 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        overflow: hidden;
+      }
+      .cat-col-desc {
+        font-size: 0.85rem;
         color: var(--text-secondary);
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        user-select: text;
+      }
+      .cat-row-link {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 0;
+        text-decoration: none;
+        color: inherit;
+      }
+      .cat-row-link .cat-icon-sm {
+        width: 30px;
+        height: 30px;
+        background: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-md);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+        flex-shrink: 0;
+        transition: all 0.3s ease;
+      }
+      .cat-row-link:hover .cat-icon-sm {
+        background: var(--accent-cyan);
+        border-color: var(--accent-cyan);
+      }
+      .cat-row-name {
+        font-family: var(--font-mono);
+        font-size: 0.88rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .cat-row-link:hover .cat-row-name {
+        color: var(--accent-cyan);
       }
       .cat-faq {
         margin-top: var(--space-10);
@@ -1401,15 +1486,54 @@
       .cat-footer a:hover {
         text-decoration: underline;
       }
+      @media (width <= 640px) {
+        .cat-main {
+          padding-left: var(--space-3);
+          padding-right: var(--space-3);
+        }
+        .cat-table-header,
+        .cat-row {
+          grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+          padding: 0 12px;
+        }
+        .cat-viewport {
+          height: 56vh;
+          min-height: 260px;
+        }
+        .cat-row-name {
+          font-size: 0.8rem;
+        }
+        .cat-col-desc {
+          font-size: 0.78rem;
+        }
+      }
     </style>
     <!-- PWA -->
     <link rel="manifest" href="../../manifest.json" />
     <link rel="icon" type="image/svg+xml" href="../../favicon.svg" />
-    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../../favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../../favicon-16x16.png"
+    />
     <link rel="apple-touch-icon" href="../../apple-touch-icon.png" />
-    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)" />
+    <meta
+      name="theme-color"
+      content="#ffffff"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#1a1a1a"
+      media="(prefers-color-scheme: dark)"
+    />
     <script src="../../assets/js/tool-chrome.js"></script>
   </head>
   <body>
@@ -1423,1685 +1547,1324 @@
         </p>
         <p class="cat-meta">205 个工具 · 纯本地运行 · 免费 · 无广告</p>
       </header>
-      <section class="cat-grid">
-        <a class="cat-card" href="easing-visualizer.html">
-          <span class="cat-card-icon">〰️</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">缓动函数可视化</span>
-            <span class="cat-card-desc">
-              35+ 缓动函数可视化预览，支持 CSS/JS/Anime.js/GSAP 多格式导出
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="api-mock.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">API 响应模拟器</span>
-            <span class="cat-card-desc">
-              API 响应模拟器，在线模拟，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="arrow-generator.html">
-          <span class="cat-card-icon">➡</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">箭头符号生成器</span>
-            <span class="cat-card-desc">
-              箭头符号生成器，一键在线生成，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="ascii-art.html">
-          <span class="cat-card-icon">▓</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">ASCII 艺术</span>
-            <span class="cat-card-desc">将文字转换为 ASCII 艺术字体</span>
-          </span>
-        </a>
-        <a class="cat-card" href="ascii-table.html">
-          <span class="cat-card-icon">A</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">ASCII 码表</span>
-            <span class="cat-card-desc">ASCII 码表速查</span>
-          </span>
-        </a>
-        <a class="cat-card" href="base64.html">
-          <span class="cat-card-icon">b64</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Base64 编解码</span>
-            <span class="cat-card-desc">Base64 编码与解码，支持文本和文件</span>
-          </span>
-        </a>
-        <a class="cat-card" href="basic-auth-generator.html">
-          <span class="cat-card-icon">🔑</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Basic Auth 生成器</span>
-            <span class="cat-card-desc">生成 HTTP Basic Authentication 头部</span>
-          </span>
-        </a>
-        <a class="cat-card" href="box-shadow.html">
-          <span class="cat-card-icon">◰</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Box Shadow 生成器</span>
-            <span class="cat-card-desc">可视化创建 CSS box-shadow，支持多层阴影和预设样式</span>
-          </span>
-        </a>
-        <a class="cat-card" href="browser-storage-viewer.html">
-          <span class="cat-card-icon">🗄️</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">浏览器存储查看器</span>
-            <span class="cat-card-desc">
-              查看和管理浏览器 LocalStorage、SessionStorage 和 Cookies
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="changelog-gen.html">
-          <span class="cat-card-icon">⚡</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">CHANGELOG 生成器</span>
-            <span class="cat-card-desc">
-              CHANGELOG 生成器，一键在线生成，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="charset-converter.html">
-          <span class="cat-card-icon">🔤</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">字符集转换器</span>
-            <span class="cat-card-desc">文本编码转换，支持 UTF-8/16、Hex、URL 编码等格式</span>
-          </span>
-        </a>
-        <a class="cat-card" href="chmod-calculator.html">
-          <span class="cat-card-icon">🔓</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Chmod 计算器</span>
-            <span class="cat-card-desc">Linux 文件权限计算，支持数字和符号模式互转</span>
-          </span>
-        </a>
-        <a class="cat-card" href="clipboard-viewer.html">
-          <span class="cat-card-icon">📋</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">剪贴板查看器</span>
-            <span class="cat-card-desc">查看剪贴板中的各种格式数据</span>
-          </span>
-        </a>
-        <a class="cat-card" href="code-diff.html">
-          <span class="cat-card-icon">⇔</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">代码对比工具</span>
-            <span class="cat-card-desc">并排对比两段代码的差异，高亮显示变更</span>
-          </span>
-        </a>
-        <a class="cat-card" href="code-stats.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">代码统计器</span>
-            <span class="cat-card-desc">
-              代码统计器，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="color-blindness.html">
-          <span class="cat-card-icon">👁</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">色盲模拟器</span>
-            <span class="cat-card-desc">模拟不同类型色盲用户看到的颜色效果</span>
-          </span>
-        </a>
-        <a class="cat-card" href="color-converter.html">
-          <span class="cat-card-icon">🎨</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">颜色转换器</span>
-            <span class="cat-card-desc">HEX、RGB、HSL 颜色格式互转，可视化调色</span>
-          </span>
-        </a>
-        <a class="cat-card" href="color-mixer.html">
-          <span class="cat-card-icon">🎨</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">颜色混合器</span>
-            <span class="cat-card-desc">两种颜色混合工具，支持多种混合模式和比例调节</span>
-          </span>
-        </a>
-        <a class="cat-card" href="color-names.html">
-          <span class="cat-card-icon">🎨</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">颜色命名查询</span>
-            <span class="cat-card-desc">
-              颜色命名查询，便捷查询，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="color-palette-generator.html">
-          <span class="cat-card-icon">🎨</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">调色板生成器</span>
-            <span class="cat-card-desc">基于色彩理论生成和谐配色方案</span>
-          </span>
-        </a>
-        <a class="cat-card" href="color-palette.html">
-          <span class="cat-card-icon">🎨</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">配色方案生成器</span>
-            <span class="cat-card-desc">生成配色方案和调色板</span>
-          </span>
-        </a>
-        <a class="cat-card" href="contrast-checker.html">
-          <span class="cat-card-icon">◐</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">颜色对比度检查器</span>
-            <span class="cat-card-desc">检查颜色对比度是否符合 WCAG 2.1 无障碍标准</span>
-          </span>
-        </a>
-        <a class="cat-card" href="cron-generator.html">
-          <span class="cat-card-icon">⏰</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Cron 生成器</span>
-            <span class="cat-card-desc">可视化生成 Cron 表达式</span>
-          </span>
-        </a>
-        <a class="cat-card" href="cron-parser.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Cron 表达式解析器</span>
-            <span class="cat-card-desc">
-              Cron 表达式解析器，在线分析，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="crontab-generator.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Crontab 生成器</span>
-            <span class="cat-card-desc">
-              Crontab 生成器，一键在线生成，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="css-animation-generator.html">
-          <span class="cat-card-icon">🎬</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">CSS 动画生成器</span>
-            <span class="cat-card-desc">可视化生成 CSS 动画和关键帧代码</span>
-          </span>
-        </a>
-        <a class="cat-card" href="css-border-radius.html">
-          <span class="cat-card-icon">◜</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Border Radius 生成器</span>
-            <span class="cat-card-desc">CSS 圆角可视化生成器</span>
-          </span>
-        </a>
-        <a class="cat-card" href="css-box-shadow.html">
-          <span class="cat-card-icon">🎨</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">CSS 盒子阴影生成器</span>
-            <span class="cat-card-desc">可视化生成 CSS box-shadow 阴影效果，支持多层阴影</span>
-          </span>
-        </a>
-        <a class="cat-card" href="css-clip-path.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">CSS Clip-path 生成器</span>
-            <span class="cat-card-desc">
-              CSS Clip-path 生成器，一键在线生成，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="css-filter-generator.html">
-          <span class="cat-card-icon">🎨</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">CSS Filter 生成器</span>
-            <span class="cat-card-desc">可视化调整 CSS filter 属性，支持预设效果和对比预览</span>
-          </span>
-        </a>
-        <a class="cat-card" href="css-filter.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">CSS 滤镜生成器</span>
-            <span class="cat-card-desc">
-              CSS 滤镜生成器，一键在线生成，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="css-formatter.html">
-          <span class="cat-card-icon">🎨</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">CSS 格式化</span>
-            <span class="cat-card-desc">CSS 代码格式化和压缩</span>
-          </span>
-        </a>
-        <a class="cat-card" href="css-grid-generator.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">CSS Grid 生成器 | 在线工具</span>
-            <span class="cat-card-desc">
-              CSS Grid 生成器 | 在线工具，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="css-grid.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">CSS Grid 生成器</span>
-            <span class="cat-card-desc">
-              CSS Grid 生成器，一键在线生成，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="css-minifier.html">
-          <span class="cat-card-icon">🎨</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">CSS 压缩/美化工具</span>
-            <span class="cat-card-desc">
-              CSS 压缩/美化工具，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="css-selector-test.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">CSS 选择器测试器</span>
-            <span class="cat-card-desc">
-              CSS 选择器测试器，在线验证，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="css-sprites.html">
-          <span class="cat-card-icon">🎨</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">CSS雪碧图生成器</span>
-            <span class="cat-card-desc">合并图片生成雪碧图</span>
-          </span>
-        </a>
-        <a class="cat-card" href="css-text-shadow.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">CSS Text Shadow 生成器</span>
-            <span class="cat-card-desc">
-              CSS Text Shadow 生成器，一键在线生成，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="css-transform.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">CSS Transform 生成器</span>
-            <span class="cat-card-desc">
-              CSS Transform 生成器，一键在线生成，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="css-unit-converter.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">CSS 单位转换器</span>
-            <span class="cat-card-desc">
-              CSS 单位转换器，多格式互转，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="cubic-bezier.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Cubic Bezier 编辑器</span>
-            <span class="cat-card-desc">
-              Cubic Bezier 编辑器，在线编辑，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="curl-converter.html">
-          <span class="cat-card-icon">↔️</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">cURL 转换器</span>
-            <span class="cat-card-desc">将 cURL 命令转换为各种编程语言代码</span>
-          </span>
-        </a>
-        <a class="cat-card" href="diff-viewer.html">
-          <span class="cat-card-icon">📊</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Git Diff 查看器</span>
-            <span class="cat-card-desc">解析并美化显示 Git diff 输出，支持文件统计</span>
-          </span>
-        </a>
-        <a class="cat-card" href="docker-compose-gen.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Docker Compose 生成器</span>
-            <span class="cat-card-desc">
-              Docker Compose 生成器，一键在线生成，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="docker-compose-generator.html">
-          <span class="cat-card-icon">🐳</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Docker Compose 生成器 | 在线工具</span>
-            <span class="cat-card-desc">
-              Docker Compose 生成器 | 在线工具，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="dockerfile-generator.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Dockerfile 生成器</span>
-            <span class="cat-card-desc">
-              Dockerfile 生成器，一键在线生成，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="editorconfig-gen.html">
-          <span class="cat-card-icon">⚡</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">editorconfig 生成器</span>
-            <span class="cat-card-desc">
-              editorconfig 生成器，一键在线生成，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="emoji-picker.html">
-          <span class="cat-card-icon">😀</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Emoji 选择器</span>
-            <span class="cat-card-desc">浏览和复制各种 Emoji 表情符号</span>
-          </span>
-        </a>
-        <a class="cat-card" href="env-editor.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">.env 文件编辑器</span>
-            <span class="cat-card-desc">
-              .env 文件编辑器，在线编辑，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="excel-viewer.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Excel 预览器</span>
-            <span class="cat-card-desc">
-              Excel 预览器，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="favicon-checker.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Favicon 检测器</span>
-            <span class="cat-card-desc">
-              Favicon 检测器，在线分析，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="flexbox-playground.html">
-          <span class="cat-card-icon">📦</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Flexbox 可视化编辑器</span>
-            <span class="cat-card-desc">可视化调整 Flexbox 布局属性，实时预览效果</span>
-          </span>
-        </a>
-        <a class="cat-card" href="git-cheatsheet.html">
-          <span class="cat-card-icon">📚</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Git 命令速查</span>
-            <span class="cat-card-desc">常用 Git 命令速查表</span>
-          </span>
-        </a>
-        <a class="cat-card" href="github-actions-generator.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">GitHub Actions 生成器</span>
-            <span class="cat-card-desc">
-              GitHub Actions 生成器，一键在线生成，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="gitignore-generator.html">
-          <span class="cat-card-icon">📄</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">.gitignore 生成器</span>
-            <span class="cat-card-desc">选择编程语言和框架，快速生成 .gitignore 文件</span>
-          </span>
-        </a>
-        <a class="cat-card" href="glassmorphism.html">
-          <span class="cat-card-icon">🪟</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Glassmorphism 生成器</span>
-            <span class="cat-card-desc">Glassmorphism 毛玻璃效果 CSS 代码生成器</span>
-          </span>
-        </a>
-        <a class="cat-card" href="glob-tester.html">
-          <span class="cat-card-icon">*</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Glob 模式测试</span>
-            <span class="cat-card-desc">Glob 模式匹配测试</span>
-          </span>
-        </a>
-        <a class="cat-card" href="graphql-builder.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">GraphQL 查询构建器</span>
-            <span class="cat-card-desc">
-              GraphQL 查询构建器，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="graphql-playground.html">
-          <span class="cat-card-icon">⬡</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">GraphQL Playground</span>
-            <span class="cat-card-desc">GraphQL查询测试工具</span>
-          </span>
-        </a>
-        <a class="cat-card" href="hash-generator.html">
-          <span class="cat-card-icon">#</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Hash 生成器</span>
-            <span class="cat-card-desc">计算文本或文件的 MD5、SHA-1、SHA-256、SHA-512 哈希值</span>
-          </span>
-        </a>
-        <a class="cat-card" href="hex-viewer.html">
-          <span class="cat-card-icon">0x</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Hex 查看器</span>
-            <span class="cat-card-desc">以十六进制查看文件或文本内容</span>
-          </span>
-        </a>
-        <a class="cat-card" href="hmac-generator.html">
-          <span class="cat-card-icon">🔏</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">HMAC 生成器</span>
-            <span class="cat-card-desc">生成 HMAC 消息认证码，支持多种哈希算法</span>
-          </span>
-        </a>
-        <a class="cat-card" href="htaccess-nginx.html">
-          <span class="cat-card-icon">🔄</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">htaccess转Nginx</span>
-            <span class="cat-card-desc">Apache htaccess转Nginx配置</span>
-          </span>
-        </a>
-        <a class="cat-card" href="html-entities.html">
-          <span class="cat-card-icon">📋</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">HTML 实体参考</span>
-            <span class="cat-card-desc">HTML 实体字符参考表，支持搜索和复制</span>
-          </span>
-        </a>
-        <a class="cat-card" href="html-entity.html">
-          <span class="cat-card-icon">&amp;amp;</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">HTML 实体编解码</span>
-            <span class="cat-card-desc">HTML 实体编码与解码，常用实体参考</span>
-          </span>
-        </a>
-        <a class="cat-card" href="html-formatter.html">
-          <span class="cat-card-icon">&lt;/&gt;</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">HTML 格式化</span>
-            <span class="cat-card-desc">HTML 代码格式化、压缩和美化</span>
-          </span>
-        </a>
-        <a class="cat-card" href="html-minify.html">
-          <span class="cat-card-icon">📦</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">HTML 压缩</span>
-            <span class="cat-card-desc">压缩 HTML 代码</span>
-          </span>
-        </a>
-        <a class="cat-card" href="html-preview.html">
-          <span class="cat-card-icon">🖼</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">HTML 实时预览</span>
-            <span class="cat-card-desc">
-              HTML 实时预览，即时预览，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="html-table-generator.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">HTML 表格生成器</span>
-            <span class="cat-card-desc">
-              HTML 表格生成器，一键在线生成，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="html-template.html">
-          <span class="cat-card-icon">📄</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">HTML 模板生成器</span>
-            <span class="cat-card-desc">生成 HTML5 页面模板，支持多种布局和 CSS 框架</span>
-          </span>
-        </a>
-        <a class="cat-card" href="html-to-jsx.html">
-          <span class="cat-card-icon">⚡</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">HTML 转 JSX/React 转换器</span>
-            <span class="cat-card-desc">
-              HTML 转 JSX/React 转换器，多格式互转，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="http-status.html">
-          <span class="cat-card-icon">200</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">HTTP 状态码参考</span>
-            <span class="cat-card-desc">HTTP 状态码速查，包含描述和使用场景</span>
-          </span>
-        </a>
-        <a class="cat-card" href="i18n-key-generator.html">
-          <span class="cat-card-icon">🌐</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">i18n Key 生成器</span>
-            <span class="cat-card-desc">根据文本智能生成国际化 key</span>
-          </span>
-        </a>
-        <a class="cat-card" href="ip-converter.html">
-          <span class="cat-card-icon">🌐</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">IP 地址转换器</span>
-            <span class="cat-card-desc">IP 地址格式转换，支持点分十进制、整数、二进制等</span>
-          </span>
-        </a>
-        <a class="cat-card" href="js-ast-viewer.html">
-          <span class="cat-card-icon">🌳</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">JavaScript AST查看器</span>
-            <span class="cat-card-desc">解析JavaScript代码的抽象语法树</span>
-          </span>
-        </a>
-        <a class="cat-card" href="js-formatter.html">
-          <span class="cat-card-icon">JS</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">JavaScript 格式化</span>
-            <span class="cat-card-desc">JavaScript 代码格式化、压缩和美化</span>
-          </span>
-        </a>
-        <a class="cat-card" href="js-minifier.html">
-          <span class="cat-card-icon">⚡</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">JavaScript 代码压缩器</span>
-            <span class="cat-card-desc">
-              JavaScript 代码压缩器，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="js-minify.html">
-          <span class="cat-card-icon">📦</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">JavaScript 压缩</span>
-            <span class="cat-card-desc">压缩 JavaScript 代码</span>
-          </span>
-        </a>
-        <a class="cat-card" href="js-obfuscator.html">
-          <span class="cat-card-icon">🔐</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">JS代码混淆</span>
-            <span class="cat-card-desc">混淆JavaScript代码</span>
-          </span>
-        </a>
-        <a class="cat-card" href="js-playground.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">JavaScript 在线运行</span>
-            <span class="cat-card-desc">
-              JavaScript 在线运行，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="json-diff.html">
-          <span class="cat-card-icon">≠</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">JSON Diff 对比</span>
-            <span class="cat-card-desc">智能对比两个 JSON 的结构和值差异</span>
-          </span>
-        </a>
-        <a class="cat-card" href="json-formatter.html">
-          <span class="cat-card-icon">{}</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">JSON 格式化</span>
-            <span class="cat-card-desc">JSON 格式化、压缩、校验，支持错误定位和语法高亮</span>
-          </span>
-        </a>
-        <a class="cat-card" href="json-minifier.html">
-          <span class="cat-card-icon">⚡</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">JSON 压缩和美化器</span>
-            <span class="cat-card-desc">
-              JSON 压缩和美化器，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="json-minify.html">
-          <span class="cat-card-icon">📦</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">JSON 压缩</span>
-            <span class="cat-card-desc">压缩 JSON 去除空格和换行</span>
-          </span>
-        </a>
-        <a class="cat-card" href="json-path-editor.html">
-          <span class="cat-card-icon">📍</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">JSON 路径编辑器</span>
-            <span class="cat-card-desc">通过路径查询、编辑和导航 JSON 数据</span>
-          </span>
-        </a>
-        <a class="cat-card" href="json-schema-validator.html">
-          <span class="cat-card-icon">📋</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">JSON Schema 验证器</span>
-            <span class="cat-card-desc">
-              JSON Schema 验证器，在线验证，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="json-to-go.html">
-          <span class="cat-card-icon">🐹</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">JSON 转 Go Struct</span>
-            <span class="cat-card-desc">
-              JSON 转 Go Struct，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="json-to-sql.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">JSON 转 SQL</span>
-            <span class="cat-card-desc">
-              JSON 转 SQL，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="json-to-typescript.html">
-          <span class="cat-card-icon">🔷</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">JSON 转 TypeScript</span>
-            <span class="cat-card-desc">将 JSON 数据转换为 TypeScript 接口定义</span>
-          </span>
-        </a>
-        <a class="cat-card" href="json-tree.html">
-          <span class="cat-card-icon">🌳</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">JSON 树形查看器</span>
-            <span class="cat-card-desc">JSON 可视化树形结构查看器，支持折叠展开和路径显示</span>
-          </span>
-        </a>
-        <a class="cat-card" href="json-typescript.html">
-          <span class="cat-card-icon">TS</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">JSON → TypeScript 类型生成</span>
-            <span class="cat-card-desc">JSON 转 TypeScript 类型</span>
-          </span>
-        </a>
-        <a class="cat-card" href="json-yaml.html">
-          <span class="cat-card-icon">⇄</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">JSON-YAML 转换</span>
-            <span class="cat-card-desc">JSON 与 YAML 格式互转，支持格式化输出</span>
-          </span>
-        </a>
-        <a class="cat-card" href="jsonpath-query.html">
-          <span class="cat-card-icon">$.</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">JSONPath 查询</span>
-            <span class="cat-card-desc">使用 JSONPath 表达式查询 JSON 数据</span>
-          </span>
-        </a>
-        <a class="cat-card" href="jsonpath-tester.html">
-          <span class="cat-card-icon">🔎</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">JSONPath 测试器</span>
-            <span class="cat-card-desc">在线测试 JSONPath 表达式，提取 JSON 数据</span>
-          </span>
-        </a>
-        <a class="cat-card" href="jwt-decoder.html">
-          <span class="cat-card-icon">🔓</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">JWT 解码器</span>
-            <span class="cat-card-desc">解码 JWT Token，查看 Header、Payload 和签名信息</span>
-          </span>
-        </a>
-        <a class="cat-card" href="keyboard-tester.html">
-          <span class="cat-card-icon">⌨️</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">键盘测试器</span>
-            <span class="cat-card-desc">测试键盘按键，显示按键事件详细信息</span>
-          </span>
-        </a>
-        <a class="cat-card" href="keycode.html">
-          <span class="cat-card-icon">⌨️</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Keycode 查看器</span>
-            <span class="cat-card-desc">获取键盘按键的 KeyCode 值</span>
-          </span>
-        </a>
-        <a class="cat-card" href="license-generator.html">
-          <span class="cat-card-icon">📜</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">License 生成器</span>
-            <span class="cat-card-desc">生成开源许可证文件，支持 MIT、Apache、GPL 等协议</span>
-          </span>
-        </a>
-        <a class="cat-card" href="markdown-to-html.html">
-          <span class="cat-card-icon">⚡</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Markdown 转 HTML 转换器</span>
-            <span class="cat-card-desc">
-              Markdown 转 HTML 转换器，多格式互转，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="math-symbols.html">
-          <span class="cat-card-icon">⚡</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">数学符号大全</span>
-            <span class="cat-card-desc">
-              数学符号大全，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="meta-viewport.html">
-          <span class="cat-card-icon">📱</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Viewport Meta 生成器</span>
-            <span class="cat-card-desc">生成移动端 Viewport meta 标签</span>
-          </span>
-        </a>
-        <a class="cat-card" href="mime-lookup.html">
-          <span class="cat-card-icon">📄</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">MIME 类型查询</span>
-            <span class="cat-card-desc">查询文件扩展名对应的 MIME 类型</span>
-          </span>
-        </a>
-        <a class="cat-card" href="neumorphism.html">
-          <span class="cat-card-icon">◐</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Neumorphism 生成器</span>
-            <span class="cat-card-desc">Neumorphism 软 UI 风格 CSS 代码生成器</span>
-          </span>
-        </a>
-        <a class="cat-card" href="nginx-config.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Nginx 配置生成器</span>
-            <span class="cat-card-desc">
-              Nginx 配置生成器，一键在线生成，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="nginx-generator.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Nginx 配置生成器 | 在线工具</span>
-            <span class="cat-card-desc">
-              Nginx 配置生成器 | 在线工具，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="openapi-viewer.html">
-          <span class="cat-card-icon">📄</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">OpenAPI/Swagger查看器</span>
-            <span class="cat-card-desc">解析展示OpenAPI文档</span>
-          </span>
-        </a>
-        <a class="cat-card" href="otp-generator.html">
-          <span class="cat-card-icon">🔑</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">OTP 验证码生成器</span>
-            <span class="cat-card-desc">生成一次性密码 (OTP/TOTP)</span>
-          </span>
-        </a>
-        <a class="cat-card" href="package-json-editor.html">
-          <span class="cat-card-icon">📦</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">package.json编辑器</span>
-            <span class="cat-card-desc">可视化编辑package.json</span>
-          </span>
-        </a>
-        <a class="cat-card" href="package-json-gen.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">package.json 生成器</span>
-            <span class="cat-card-desc">
-              package.json 生成器，一键在线生成，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="protobuf-decoder.html">
-          <span class="cat-card-icon">◈</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Protobuf 解码器</span>
-            <span class="cat-card-desc">解码 Protobuf 二进制数据，无需 schema 定义</span>
-          </span>
-        </a>
-        <a class="cat-card" href="punycode.html">
-          <span class="cat-card-icon">🌐</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Punycode 转换器</span>
-            <span class="cat-card-desc">国际化域名 (IDN) 与 Punycode 编码互转</span>
-          </span>
-        </a>
-        <a class="cat-card" href="readme-generator.html">
-          <span class="cat-card-icon">📝</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">README 生成器</span>
-            <span class="cat-card-desc">快速生成项目 README.md，支持徽章、特性、安装说明等</span>
-          </span>
-        </a>
-        <a class="cat-card" href="readme-preview.html">
-          <span class="cat-card-icon">⚡</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">README.md 实时预览器</span>
-            <span class="cat-card-desc">
-              README.md 实时预览器，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="regex-cheatsheet.html">
-          <span class="cat-card-icon">📖</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">正则表达式速查</span>
-            <span class="cat-card-desc">正则表达式语法速查表</span>
-          </span>
-        </a>
-        <a class="cat-card" href="regex-explainer.html">
-          <span class="cat-card-icon">🔍</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">正则可视化解释器</span>
-            <span class="cat-card-desc">可视化解析正则表达式，逐步解释每个部分的含义</span>
-          </span>
-        </a>
-        <a class="cat-card" href="regex-generator.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">正则表达式生成器</span>
-            <span class="cat-card-desc">
-              正则表达式生成器，一键在线生成，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="regex-tester.html">
-          <span class="cat-card-icon">.*</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">正则测试器</span>
-            <span class="cat-card-desc">正则表达式测试，匹配高亮，捕获组展示</span>
-          </span>
-        </a>
-        <a class="cat-card" href="regex-visualizer.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">正则表达式可视化器</span>
-            <span class="cat-card-desc">
-              正则表达式可视化器，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="responsive-preview.html">
-          <span class="cat-card-icon">📱</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">响应式预览</span>
-            <span class="cat-card-desc">
-              响应式预览，即时预览，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="rsa-keygen.html">
-          <span class="cat-card-icon">🔐</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">RSA 密钥对生成器</span>
-            <span class="cat-card-desc">生成 RSA 公私钥对</span>
-          </span>
-        </a>
-        <a class="cat-card" href="semver-compare.html">
-          <span class="cat-card-icon">🏷️</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Semver 比较器</span>
-            <span class="cat-card-desc">语义化版本号比较和验证</span>
-          </span>
-        </a>
-        <a class="cat-card" href="shortcuts-cheatsheet.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">快捷键速查表</span>
-            <span class="cat-card-desc">
-              快捷键速查表，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="slug-generator.html">
-          <span class="cat-card-icon">🔗</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Slug 生成器</span>
-            <span class="cat-card-desc">生成 URL 友好的 slug 字符串</span>
-          </span>
-        </a>
-        <a class="cat-card" href="sql-converter.html">
-          <span class="cat-card-icon">🔀</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">SQL 转换器</span>
-            <span class="cat-card-desc">
-              SQL 转换器，多格式互转，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="sql-formatter.html">
-          <span class="cat-card-icon">📊</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">SQL 格式化</span>
-            <span class="cat-card-desc">SQL 语句格式化和美化</span>
-          </span>
-        </a>
-        <a class="cat-card" href="sql-playground.html">
-          <span class="cat-card-icon">🗄️</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">SQL在线执行器</span>
-            <span class="cat-card-desc">在浏览器中执行SQL查询</span>
-          </span>
-        </a>
-        <a class="cat-card" href="sql-to-mongo.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">SQL 转 MongoDB 查询</span>
-            <span class="cat-card-desc">
-              SQL 转 MongoDB 查询，便捷查询，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="sse-test.html">
-          <span class="cat-card-icon">⚡</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">SSE测试客户端</span>
-            <span class="cat-card-desc">
-              SSE测试客户端，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="string-builder.html">
-          <span class="cat-card-icon">🔗</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">字符串拼接器</span>
-            <span class="cat-card-desc">可视化字符串拼接工具，支持拖拽排序和分隔符设置</span>
-          </span>
-        </a>
-        <a class="cat-card" href="svg-optimizer.html">
-          <span class="cat-card-icon">🎨</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">SVG优化器</span>
-            <span class="cat-card-desc">优化压缩SVG文件</span>
-          </span>
-        </a>
-        <a class="cat-card" href="svg-path-editor.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">SVG 路径编辑器</span>
-            <span class="cat-card-desc">
-              SVG 路径编辑器，在线编辑，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="symbols-table.html">
-          <span class="cat-card-icon">✨</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">特殊符号大全</span>
-            <span class="cat-card-desc">
-              特殊符号大全，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="table-border.html">
-          <span class="cat-card-icon">📊</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">表格线生成器</span>
-            <span class="cat-card-desc">
-              表格线生成器，一键在线生成，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="tailwind-config-generator.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Tailwind CSS 配置生成器</span>
-            <span class="cat-card-desc">
-              Tailwind CSS 配置生成器，一键在线生成，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="tailwind-lookup.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Tailwind CSS 查询器</span>
-            <span class="cat-card-desc">
-              Tailwind CSS 查询器，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="toml-yaml-json.html">
-          <span class="cat-card-icon">⇆</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">TOML/YAML/JSON 转换器</span>
-            <span class="cat-card-desc">TOML、YAML、JSON 配置格式互相转换</span>
-          </span>
-        </a>
-        <a class="cat-card" href="tsconfig-editor.html">
-          <span class="cat-card-icon">🔷</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">tsconfig编辑器</span>
-            <span class="cat-card-desc">可视化编辑tsconfig.json</span>
-          </span>
-        </a>
-        <a class="cat-card" href="unicode-converter.html">
-          <span class="cat-card-icon">U+</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Unicode 转换器</span>
-            <span class="cat-card-desc">Unicode 编解码，支持 \uXXXX、HTML 实体等格式</span>
-          </span>
-        </a>
-        <a class="cat-card" href="unicode-lookup.html">
-          <span class="cat-card-icon">🔤</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Unicode 查询</span>
-            <span class="cat-card-desc">Unicode 字符查询和信息</span>
-          </span>
-        </a>
-        <a class="cat-card" href="url-codec.html">
-          <span class="cat-card-icon">%</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">URL 编解码</span>
-            <span class="cat-card-desc">URL 编码与解码，支持完整 URL 或组件</span>
-          </span>
-        </a>
-        <a class="cat-card" href="url-parser.html">
-          <span class="cat-card-icon">🔗</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">URL 解析器</span>
-            <span class="cat-card-desc">解析 URL 各组成部分，提取查询参数</span>
-          </span>
-        </a>
-        <a class="cat-card" href="webhook-tester.html">
-          <span class="cat-card-icon">🔗</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Webhook测试器</span>
-            <span class="cat-card-desc">发送HTTP请求测试Webhook</span>
-          </span>
-        </a>
-        <a class="cat-card" href="websocket-test.html">
-          <span class="cat-card-icon">⚡</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">WebSocket测试客户端</span>
-            <span class="cat-card-desc">
-              WebSocket测试客户端，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="xml-formatter.html">
-          <span class="cat-card-icon">📄</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">XML 格式化</span>
-            <span class="cat-card-desc">XML 格式化和验证</span>
-          </span>
-        </a>
-        <a class="cat-card" href="xml-json.html">
-          <span class="cat-card-icon">⇆</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">XML ⇄ JSON 转换</span>
-            <span class="cat-card-desc">XML 与 JSON 格式互转</span>
-          </span>
-        </a>
-        <a class="cat-card" href="xpath-tester.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">XPath 测试器</span>
-            <span class="cat-card-desc">
-              XPath 测试器，在线验证，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="code-screenshot.html">
-          <span class="cat-card-icon">📸</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">代码截图美化</span>
-            <span class="cat-card-desc">将代码转换为精美的截图，支持50+编程语言和多种主题</span>
-          </span>
-        </a>
-        <a class="cat-card" href="chart-generator.html">
-          <span class="cat-card-icon">💻</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">数据图表生成器</span>
-            <span class="cat-card-desc">
-              数据图表生成器，一键在线生成，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="gradient-generator.html">
-          <span class="cat-card-icon">💻</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">CSS 渐变生成器</span>
-            <span class="cat-card-desc">
-              CSS 渐变生成器，一键在线生成，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="http-client.html">
-          <span class="cat-card-icon">💻</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">HTTP 请求测试</span>
-            <span class="cat-card-desc">
-              HTTP 请求测试，在线验证，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="json-schema-generator.html">
-          <span class="cat-card-icon">💻</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">JSON Schema 生成器</span>
-            <span class="cat-card-desc">
-              JSON Schema 生成器，一键在线生成，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="number-base.html">
-          <span class="cat-card-icon">💻</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">进制转换器</span>
-            <span class="cat-card-desc">
-              进制转换器，多格式互转，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="diff-checker.html">
-          <span class="cat-card-icon">📊</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">文本差异比较</span>
-            <span class="cat-card-desc">比较两段文本的差异，高亮显示修改内容</span>
-          </span>
-        </a>
-        <a class="cat-card" href="keyboard-codes.html">
-          <span class="cat-card-icon">⌨️</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">键盘码查询</span>
-            <span class="cat-card-desc">键盘按键码查询</span>
-          </span>
-        </a>
-        <a class="cat-card" href="url-encoder.html">
-          <span class="cat-card-icon">🔗</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">URL编码</span>
-            <span class="cat-card-desc">URL编码解码</span>
-          </span>
-        </a>
-        <a class="cat-card" href="markdown-preview.html">
-          <span class="cat-card-icon">📝</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Markdown预览</span>
-            <span class="cat-card-desc">实时预览Markdown</span>
-          </span>
-        </a>
-        <a class="cat-card" href="table-generator.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">表格生成器</span>
-            <span class="cat-card-desc">生成Markdown/HTML/CSV表格</span>
-          </span>
-        </a>
-        <a class="cat-card" href="api-tester.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Api Tester</span>
-            <span class="cat-card-desc">
-              Api Tester，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="css-animation.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Css Animation</span>
-            <span class="cat-card-desc">
-              Css Animation，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="css-flexbox.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Css Flexbox</span>
-            <span class="cat-card-desc">
-              Css Flexbox，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="css-gradient-generator.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Css Gradient Generator</span>
-            <span class="cat-card-desc">
-              Css Gradient Generator，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="curl-builder.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Curl Builder</span>
-            <span class="cat-card-desc">
-              Curl Builder，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="docker-command-builder.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Docker Command Builder</span>
-            <span class="cat-card-desc">
-              Docker Command Builder，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="env-generator.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Env Generator</span>
-            <span class="cat-card-desc">
-              Env Generator，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="git-command-builder.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Git Command Builder</span>
-            <span class="cat-card-desc">
-              Git Command Builder，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="git-command-helper.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Git Command Helper</span>
-            <span class="cat-card-desc">
-              Git Command Helper，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="htaccess-generator.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Htaccess 生成器</span>
-            <span class="cat-card-desc">
-              Htaccess 生成器，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="html-entity-encoder.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Html Entity Encoder</span>
-            <span class="cat-card-desc">
-              Html Entity Encoder，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="html-minifier.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Html Minifier</span>
-            <span class="cat-card-desc">
-              Html Minifier，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="http-status-codes.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Http Status Codes</span>
-            <span class="cat-card-desc">
-              Http Status Codes，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="json-path-finder.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Json Path Finder</span>
-            <span class="cat-card-desc">
-              Json Path Finder，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="json-path-tester.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Json Path Tester</span>
-            <span class="cat-card-desc">
-              Json Path Tester，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="lorem-ipsum.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Lorem Ipsum 占位文本生成器</span>
-            <span class="cat-card-desc">
-              Lorem Ipsum 占位文本生成器，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="nginx-config-generator.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Nginx Config Generator</span>
-            <span class="cat-card-desc">
-              Nginx Config Generator，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="npm-command-helper.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Npm Command Helper</span>
-            <span class="cat-card-desc">
-              Npm Command Helper，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="sql-keywords.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Sql Keywords</span>
-            <span class="cat-card-desc">
-              Sql Keywords，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="string-escape.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">String Escape</span>
-            <span class="cat-card-desc">
-              String Escape，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="yaml-formatter.html">
-          <span class="cat-card-icon">🔧</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Yaml Formatter</span>
-            <span class="cat-card-desc">
-              Yaml Formatter，在线使用，开发工具，浏览器本地运行无需上传
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="css-specificity-calculator.html">
-          <span class="cat-card-icon">⚖️</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">CSS 选择器权重计算器</span>
-            <span class="cat-card-desc">
-              输入任意 CSS 选择器，实时计算其优先级权重（a-b-c
-              三元组），并可视化比较多个选择器的层叠顺序。
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="fluid-typography-clamp-generator.html">
-          <span class="cat-card-icon">Aa</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">流体排版 / CSS clamp 生成器</span>
-            <span class="cat-card-desc">
-              根据最小/最大视口宽度和字号，自动生成 CSS clamp()
-              函数，实现响应式流体字体大小，无需媒体查询。
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="media-query-builder.html">
-          <span class="cat-card-icon">📐</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">CSS 媒体查询生成器</span>
-            <span class="cat-card-desc">
-              可视化配置断点条件（宽度、高度、方向、分辨率），一键生成标准 CSS @media 查询代码。
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="px-rem-em-converter.html">
-          <span class="cat-card-icon">px</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">px / rem / em 单位转换器</span>
-            <span class="cat-card-desc">
-              基于根字号（root font-size）在 px、rem、em、pt 之间互相换算，快速查出任意 CSS
-              尺寸的等效值。
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="type-scale-calculator.html">
-          <span class="cat-card-icon">Aa</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">字型比例计算器</span>
-            <span class="cat-card-desc">
-              输入基准字号和比例（Major Third、Perfect Fourth
-              等），生成完整的字型比例阶梯，并预览各级 heading 效果。
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="css-container-query-builder.html">
-          <span class="cat-card-icon">📦</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">CSS 容器查询生成器</span>
-            <span class="cat-card-desc">
-              可视化构建 CSS @container 查询规则，设置容器名称和尺寸条件，生成即用代码片段。
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="css-z-index-stacking-visualizer.html">
-          <span class="cat-card-icon">📐</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">CSS z-index 层叠上下文可视化</span>
-            <span class="cat-card-desc">
-              交互式演示 CSS 层叠上下文规则：添加元素、设置 z-index
-              和触发层叠的属性，实时看到层叠顺序。
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="svg-sprite-generator.html">
-          <span class="cat-card-icon">🎯</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">SVG Sprite 生成器</span>
-            <span class="cat-card-desc">
-              上传多个 SVG 图标，合并生成 &lt;svg&gt; symbol sprite 文件，并输出每个图标的
-              &lt;use&gt; 引用代码。
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="svg-to-data-uri.html">
-          <span class="cat-card-icon">🖼</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">SVG 转 Data URI 编码器</span>
-            <span class="cat-card-desc">
-              将 SVG 代码转换为适合 CSS background-image 使用的 data URI 格式，支持 URL 编码和
-              Base64 两种方式。
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="sri-hash-generator.html">
-          <span class="cat-card-icon">🔐</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">SRI 哈希生成器</span>
-            <span class="cat-card-desc">
-              为 CDN 脚本或样式表生成 Subresource Integrity（SRI）integrity 属性值，支持
-              SHA-256/384/512。
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="regex-find-replace-tester.html">
-          <span class="cat-card-icon">.*</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Regex 查找替换测试器</span>
-            <span class="cat-card-desc">
-              输入正则表达式和替换模式，实时预览在输入文本上的替换结果，支持捕获组引用（$1, \1）。
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="har-viewer.html">
-          <span class="cat-card-icon">🌐</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">HAR 文件查看器</span>
-            <span class="cat-card-desc">
-              拖入 .har 文件，可视化展示所有 HTTP 请求的时序瀑布图、请求头、响应体和耗时统计。
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="json-merge-patch.html">
-          <span class="cat-card-icon">⇄</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">JSON Merge Patch 工具</span>
-            <span class="cat-card-desc">
-              按 RFC 7396 规范对两个 JSON 文档执行 merge patch 操作，实时预览合并结果。
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="ndjson-formatter.html">
-          <span class="cat-card-icon">{L}</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">NDJSON / JSONL 格式化器</span>
-            <span class="cat-card-desc">
-              格式化和验证换行分隔 JSON（NDJSON/JSONL）文件，逐行解析并高亮错误行，支持行数统计。
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="ini-file-editor.html">
-          <span class="cat-card-icon">⚙️</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">INI / 配置文件编辑器</span>
-            <span class="cat-card-desc">
-              在线解析和编辑 .ini/.cfg
-              配置文件，支持分节（section）、键值对增删改，导出格式化后的文件。
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="java-properties-editor.html">
-          <span class="cat-card-icon">⚙️</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Java .properties 文件编辑器</span>
-            <span class="cat-card-desc">
-              在线编辑 Java .properties 文件，支持 Unicode
-              转义（\uXXXX）自动处理、注释保留和键值对搜索。
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="access-log-analyzer.html">
-          <span class="cat-card-icon">📊</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Nginx / Apache 访问日志分析器</span>
-            <span class="cat-card-desc">
-              粘贴 Nginx 或 Apache 访问日志，自动解析并统计 Top
-              IP、路径、状态码、带宽，可视化展示流量模式。
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="ssh-keygen-helper.html">
-          <span class="cat-card-icon">🔑</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">SSH 密钥对生成器</span>
-            <span class="cat-card-desc">
-              纯浏览器端生成 RSA / Ed25519 SSH 密钥对，无需安装 ssh-keygen，输出公钥、私钥和
-              authorized_keys 格式。
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="po-file-editor.html">
-          <span class="cat-card-icon">🌐</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">PO / Gettext 翻译文件编辑器</span>
-            <span class="cat-card-desc">
-              上传 .po 或 .pot 文件，以表格形式编辑 msgid 和
-              msgstr，支持过滤未翻译条目，下载修改后的文件。
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="email-address-validator.html">
-          <span class="cat-card-icon">@</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">邮箱地址格式验证器</span>
-            <span class="cat-card-desc">
-              验证邮箱地址语法是否符合 RFC 5321/5322 规范，检查域名部分格式，并批量处理多行输入。
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="geojson-viewer.html">
-          <span class="cat-card-icon">🗺</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">GeoJSON 查看器 / 编辑器</span>
-            <span class="cat-card-desc">
-              在地图上渲染 GeoJSON 文件（使用 Leaflet），支持点击查看属性、高亮选中要素，并可编辑
-              JSON 实时刷新。
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="isbn-validator.html">
-          <span class="cat-card-icon">📚</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">ISBN 验证与解析</span>
-            <span class="cat-card-desc">
-              验证 ISBN-10 / ISBN-13 校验位，解析出版商和出版社前缀含义，并在 ISBN-10 和 ISBN-13
-              之间互转。
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="crc32-checksum-calculator.html">
-          <span class="cat-card-icon">🔢</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">CRC32 / Adler-32 校验计算器</span>
-            <span class="cat-card-desc">
-              计算文本或文件的 CRC-32、Adler-32、FNV-1a 校验值，补充现有 MD5/SHA
-              系哈希工具未覆盖的非密码学校验。
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="favicon-ico-generator.html">
-          <span class="cat-card-icon">🌐</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Favicon 多尺寸 ICO 生成器</span>
-            <span class="cat-card-desc">
-              上传 PNG/SVG 图片，一键生成包含 16×16、32×32、48×48 的 .ico 文件，以及
-              apple-touch-icon 和 PWA manifest 所需的各尺寸 PNG。
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="markdown-linter.html">
-          <span class="cat-card-icon">📝</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">Markdown 语法检查器</span>
-            <span class="cat-card-desc">
-              检查 Markdown
-              文档中的常见问题：标题层级跳跃、重复标题、代码块未指定语言、链接格式错误等，输出带行号的报告。
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="json-schema-to-form.html">
-          <span class="cat-card-icon">📋</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">JSON Schema → HTML 表单生成器</span>
-            <span class="cat-card-desc">
-              粘贴 JSON Schema，自动生成对应的 HTML
-              表单（支持字符串、数字、枚举、对象、数组类型），并实时验证输入值。
-            </span>
-          </span>
-        </a>
-        <a class="cat-card" href="cors-preflight-debugger.html">
-          <span class="cat-card-icon">🔀</span>
-          <span class="cat-card-body">
-            <span class="cat-card-name">CORS 请求调试器</span>
-            <span class="cat-card-desc">
-              模拟 preflight 请求，解析 CORS 响应头，定位跨域报错根因，显示各字段含义。
-            </span>
-          </span>
-        </a>
+      <section class="cat-table">
+        <div class="cat-table-header" aria-hidden="true">
+          <span class="cat-col">工具</span>
+          <span class="cat-col cat-col-desc">描述</span>
+        </div>
+        <div
+          class="cat-viewport"
+          id="cat-viewport"
+          role="list"
+          aria-label="开发工具工具列表"
+        >
+          <div class="cat-spacer" id="cat-spacer"></div>
+        </div>
       </section>
       <footer class="cat-footer">
         <a href="../../index.html">← 返回 WebUtils 全部工具</a>
       </footer>
     </main>
+    <script src="../../assets/js/virtual-core.js"></script>
+    <script>
+      // 分类工具数据（由 sync 脚本生成）
+      const CAT_TOOLS = [
+        {
+          href: "easing-visualizer.html",
+          icon: "〰️",
+          name: "缓动函数可视化",
+          desc: "35+ 缓动函数可视化预览，支持 CSS/JS/Anime.js/GSAP 多格式导出",
+        },
+        {
+          href: "api-mock.html",
+          icon: "🔧",
+          name: "API 响应模拟器",
+          desc: "API 响应模拟器，在线模拟，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "arrow-generator.html",
+          icon: "➡",
+          name: "箭头符号生成器",
+          desc: "箭头符号生成器，一键在线生成，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "ascii-art.html",
+          icon: "▓",
+          name: "ASCII 艺术",
+          desc: "将文字转换为 ASCII 艺术字体",
+        },
+        {
+          href: "ascii-table.html",
+          icon: "A",
+          name: "ASCII 码表",
+          desc: "ASCII 码表速查",
+        },
+        {
+          href: "base64.html",
+          icon: "b64",
+          name: "Base64 编解码",
+          desc: "Base64 编码与解码，支持文本和文件",
+        },
+        {
+          href: "basic-auth-generator.html",
+          icon: "🔑",
+          name: "Basic Auth 生成器",
+          desc: "生成 HTTP Basic Authentication 头部",
+        },
+        {
+          href: "box-shadow.html",
+          icon: "◰",
+          name: "Box Shadow 生成器",
+          desc: "可视化创建 CSS box-shadow，支持多层阴影和预设样式",
+        },
+        {
+          href: "browser-storage-viewer.html",
+          icon: "🗄️",
+          name: "浏览器存储查看器",
+          desc: "查看和管理浏览器 LocalStorage、SessionStorage 和 Cookies",
+        },
+        {
+          href: "changelog-gen.html",
+          icon: "⚡",
+          name: "CHANGELOG 生成器",
+          desc: "CHANGELOG 生成器，一键在线生成，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "charset-converter.html",
+          icon: "🔤",
+          name: "字符集转换器",
+          desc: "文本编码转换，支持 UTF-8/16、Hex、URL 编码等格式",
+        },
+        {
+          href: "chmod-calculator.html",
+          icon: "🔓",
+          name: "Chmod 计算器",
+          desc: "Linux 文件权限计算，支持数字和符号模式互转",
+        },
+        {
+          href: "clipboard-viewer.html",
+          icon: "📋",
+          name: "剪贴板查看器",
+          desc: "查看剪贴板中的各种格式数据",
+        },
+        {
+          href: "code-diff.html",
+          icon: "⇔",
+          name: "代码对比工具",
+          desc: "并排对比两段代码的差异，高亮显示变更",
+        },
+        {
+          href: "code-stats.html",
+          icon: "🔧",
+          name: "代码统计器",
+          desc: "代码统计器，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "color-blindness.html",
+          icon: "👁",
+          name: "色盲模拟器",
+          desc: "模拟不同类型色盲用户看到的颜色效果",
+        },
+        {
+          href: "color-converter.html",
+          icon: "🎨",
+          name: "颜色转换器",
+          desc: "HEX、RGB、HSL 颜色格式互转，可视化调色",
+        },
+        {
+          href: "color-mixer.html",
+          icon: "🎨",
+          name: "颜色混合器",
+          desc: "两种颜色混合工具，支持多种混合模式和比例调节",
+        },
+        {
+          href: "color-names.html",
+          icon: "🎨",
+          name: "颜色命名查询",
+          desc: "颜色命名查询，便捷查询，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "color-palette-generator.html",
+          icon: "🎨",
+          name: "调色板生成器",
+          desc: "基于色彩理论生成和谐配色方案",
+        },
+        {
+          href: "color-palette.html",
+          icon: "🎨",
+          name: "配色方案生成器",
+          desc: "生成配色方案和调色板",
+        },
+        {
+          href: "contrast-checker.html",
+          icon: "◐",
+          name: "颜色对比度检查器",
+          desc: "检查颜色对比度是否符合 WCAG 2.1 无障碍标准",
+        },
+        {
+          href: "cron-generator.html",
+          icon: "⏰",
+          name: "Cron 生成器",
+          desc: "可视化生成 Cron 表达式",
+        },
+        {
+          href: "cron-parser.html",
+          icon: "🔧",
+          name: "Cron 表达式解析器",
+          desc: "Cron 表达式解析器，在线分析，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "crontab-generator.html",
+          icon: "🔧",
+          name: "Crontab 生成器",
+          desc: "Crontab 生成器，一键在线生成，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "css-animation-generator.html",
+          icon: "🎬",
+          name: "CSS 动画生成器",
+          desc: "可视化生成 CSS 动画和关键帧代码",
+        },
+        {
+          href: "css-border-radius.html",
+          icon: "◜",
+          name: "Border Radius 生成器",
+          desc: "CSS 圆角可视化生成器",
+        },
+        {
+          href: "css-box-shadow.html",
+          icon: "🎨",
+          name: "CSS 盒子阴影生成器",
+          desc: "可视化生成 CSS box-shadow 阴影效果，支持多层阴影",
+        },
+        {
+          href: "css-clip-path.html",
+          icon: "🔧",
+          name: "CSS Clip-path 生成器",
+          desc: "CSS Clip-path 生成器，一键在线生成，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "css-filter-generator.html",
+          icon: "🎨",
+          name: "CSS Filter 生成器",
+          desc: "可视化调整 CSS filter 属性，支持预设效果和对比预览",
+        },
+        {
+          href: "css-filter.html",
+          icon: "🔧",
+          name: "CSS 滤镜生成器",
+          desc: "CSS 滤镜生成器，一键在线生成，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "css-formatter.html",
+          icon: "🎨",
+          name: "CSS 格式化",
+          desc: "CSS 代码格式化和压缩",
+        },
+        {
+          href: "css-grid-generator.html",
+          icon: "🔧",
+          name: "CSS Grid 生成器 | 在线工具",
+          desc: "CSS Grid 生成器 | 在线工具，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "css-grid.html",
+          icon: "🔧",
+          name: "CSS Grid 生成器",
+          desc: "CSS Grid 生成器，一键在线生成，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "css-minifier.html",
+          icon: "🎨",
+          name: "CSS 压缩/美化工具",
+          desc: "CSS 压缩/美化工具，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "css-selector-test.html",
+          icon: "🔧",
+          name: "CSS 选择器测试器",
+          desc: "CSS 选择器测试器，在线验证，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "css-sprites.html",
+          icon: "🎨",
+          name: "CSS雪碧图生成器",
+          desc: "合并图片生成雪碧图",
+        },
+        {
+          href: "css-text-shadow.html",
+          icon: "🔧",
+          name: "CSS Text Shadow 生成器",
+          desc: "CSS Text Shadow 生成器，一键在线生成，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "css-transform.html",
+          icon: "🔧",
+          name: "CSS Transform 生成器",
+          desc: "CSS Transform 生成器，一键在线生成，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "css-unit-converter.html",
+          icon: "🔧",
+          name: "CSS 单位转换器",
+          desc: "CSS 单位转换器，多格式互转，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "cubic-bezier.html",
+          icon: "🔧",
+          name: "Cubic Bezier 编辑器",
+          desc: "Cubic Bezier 编辑器，在线编辑，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "curl-converter.html",
+          icon: "↔️",
+          name: "cURL 转换器",
+          desc: "将 cURL 命令转换为各种编程语言代码",
+        },
+        {
+          href: "diff-viewer.html",
+          icon: "📊",
+          name: "Git Diff 查看器",
+          desc: "解析并美化显示 Git diff 输出，支持文件统计",
+        },
+        {
+          href: "docker-compose-gen.html",
+          icon: "🔧",
+          name: "Docker Compose 生成器",
+          desc: "Docker Compose 生成器，一键在线生成，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "docker-compose-generator.html",
+          icon: "🐳",
+          name: "Docker Compose 生成器 | 在线工具",
+          desc: "Docker Compose 生成器 | 在线工具，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "dockerfile-generator.html",
+          icon: "🔧",
+          name: "Dockerfile 生成器",
+          desc: "Dockerfile 生成器，一键在线生成，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "editorconfig-gen.html",
+          icon: "⚡",
+          name: "editorconfig 生成器",
+          desc: "editorconfig 生成器，一键在线生成，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "emoji-picker.html",
+          icon: "😀",
+          name: "Emoji 选择器",
+          desc: "浏览和复制各种 Emoji 表情符号",
+        },
+        {
+          href: "env-editor.html",
+          icon: "🔧",
+          name: ".env 文件编辑器",
+          desc: ".env 文件编辑器，在线编辑，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "excel-viewer.html",
+          icon: "🔧",
+          name: "Excel 预览器",
+          desc: "Excel 预览器，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "favicon-checker.html",
+          icon: "🔧",
+          name: "Favicon 检测器",
+          desc: "Favicon 检测器，在线分析，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "flexbox-playground.html",
+          icon: "📦",
+          name: "Flexbox 可视化编辑器",
+          desc: "可视化调整 Flexbox 布局属性，实时预览效果",
+        },
+        {
+          href: "git-cheatsheet.html",
+          icon: "📚",
+          name: "Git 命令速查",
+          desc: "常用 Git 命令速查表",
+        },
+        {
+          href: "github-actions-generator.html",
+          icon: "🔧",
+          name: "GitHub Actions 生成器",
+          desc: "GitHub Actions 生成器，一键在线生成，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "gitignore-generator.html",
+          icon: "📄",
+          name: ".gitignore 生成器",
+          desc: "选择编程语言和框架，快速生成 .gitignore 文件",
+        },
+        {
+          href: "glassmorphism.html",
+          icon: "🪟",
+          name: "Glassmorphism 生成器",
+          desc: "Glassmorphism 毛玻璃效果 CSS 代码生成器",
+        },
+        {
+          href: "glob-tester.html",
+          icon: "*",
+          name: "Glob 模式测试",
+          desc: "Glob 模式匹配测试",
+        },
+        {
+          href: "graphql-builder.html",
+          icon: "🔧",
+          name: "GraphQL 查询构建器",
+          desc: "GraphQL 查询构建器，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "graphql-playground.html",
+          icon: "⬡",
+          name: "GraphQL Playground",
+          desc: "GraphQL查询测试工具",
+        },
+        {
+          href: "hash-generator.html",
+          icon: "#",
+          name: "Hash 生成器",
+          desc: "计算文本或文件的 MD5、SHA-1、SHA-256、SHA-512 哈希值",
+        },
+        {
+          href: "hex-viewer.html",
+          icon: "0x",
+          name: "Hex 查看器",
+          desc: "以十六进制查看文件或文本内容",
+        },
+        {
+          href: "hmac-generator.html",
+          icon: "🔏",
+          name: "HMAC 生成器",
+          desc: "生成 HMAC 消息认证码，支持多种哈希算法",
+        },
+        {
+          href: "htaccess-nginx.html",
+          icon: "🔄",
+          name: "htaccess转Nginx",
+          desc: "Apache htaccess转Nginx配置",
+        },
+        {
+          href: "html-entities.html",
+          icon: "📋",
+          name: "HTML 实体参考",
+          desc: "HTML 实体字符参考表，支持搜索和复制",
+        },
+        {
+          href: "html-entity.html",
+          icon: "&amp;",
+          name: "HTML 实体编解码",
+          desc: "HTML 实体编码与解码，常用实体参考",
+        },
+        {
+          href: "html-formatter.html",
+          icon: "\u003c/>",
+          name: "HTML 格式化",
+          desc: "HTML 代码格式化、压缩和美化",
+        },
+        {
+          href: "html-minify.html",
+          icon: "📦",
+          name: "HTML 压缩",
+          desc: "压缩 HTML 代码",
+        },
+        {
+          href: "html-preview.html",
+          icon: "🖼",
+          name: "HTML 实时预览",
+          desc: "HTML 实时预览，即时预览，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "html-table-generator.html",
+          icon: "🔧",
+          name: "HTML 表格生成器",
+          desc: "HTML 表格生成器，一键在线生成，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "html-template.html",
+          icon: "📄",
+          name: "HTML 模板生成器",
+          desc: "生成 HTML5 页面模板，支持多种布局和 CSS 框架",
+        },
+        {
+          href: "html-to-jsx.html",
+          icon: "⚡",
+          name: "HTML 转 JSX/React 转换器",
+          desc: "HTML 转 JSX/React 转换器，多格式互转，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "http-status.html",
+          icon: "200",
+          name: "HTTP 状态码参考",
+          desc: "HTTP 状态码速查，包含描述和使用场景",
+        },
+        {
+          href: "i18n-key-generator.html",
+          icon: "🌐",
+          name: "i18n Key 生成器",
+          desc: "根据文本智能生成国际化 key",
+        },
+        {
+          href: "ip-converter.html",
+          icon: "🌐",
+          name: "IP 地址转换器",
+          desc: "IP 地址格式转换，支持点分十进制、整数、二进制等",
+        },
+        {
+          href: "js-ast-viewer.html",
+          icon: "🌳",
+          name: "JavaScript AST查看器",
+          desc: "解析JavaScript代码的抽象语法树",
+        },
+        {
+          href: "js-formatter.html",
+          icon: "JS",
+          name: "JavaScript 格式化",
+          desc: "JavaScript 代码格式化、压缩和美化",
+        },
+        {
+          href: "js-minifier.html",
+          icon: "⚡",
+          name: "JavaScript 代码压缩器",
+          desc: "JavaScript 代码压缩器，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "js-minify.html",
+          icon: "📦",
+          name: "JavaScript 压缩",
+          desc: "压缩 JavaScript 代码",
+        },
+        {
+          href: "js-obfuscator.html",
+          icon: "🔐",
+          name: "JS代码混淆",
+          desc: "混淆JavaScript代码",
+        },
+        {
+          href: "js-playground.html",
+          icon: "🔧",
+          name: "JavaScript 在线运行",
+          desc: "JavaScript 在线运行，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "json-diff.html",
+          icon: "≠",
+          name: "JSON Diff 对比",
+          desc: "智能对比两个 JSON 的结构和值差异",
+        },
+        {
+          href: "json-formatter.html",
+          icon: "{}",
+          name: "JSON 格式化",
+          desc: "JSON 格式化、压缩、校验，支持错误定位和语法高亮",
+        },
+        {
+          href: "json-minifier.html",
+          icon: "⚡",
+          name: "JSON 压缩和美化器",
+          desc: "JSON 压缩和美化器，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "json-minify.html",
+          icon: "📦",
+          name: "JSON 压缩",
+          desc: "压缩 JSON 去除空格和换行",
+        },
+        {
+          href: "json-path-editor.html",
+          icon: "📍",
+          name: "JSON 路径编辑器",
+          desc: "通过路径查询、编辑和导航 JSON 数据",
+        },
+        {
+          href: "json-schema-validator.html",
+          icon: "📋",
+          name: "JSON Schema 验证器",
+          desc: "JSON Schema 验证器，在线验证，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "json-to-go.html",
+          icon: "🐹",
+          name: "JSON 转 Go Struct",
+          desc: "JSON 转 Go Struct，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "json-to-sql.html",
+          icon: "🔧",
+          name: "JSON 转 SQL",
+          desc: "JSON 转 SQL，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "json-to-typescript.html",
+          icon: "🔷",
+          name: "JSON 转 TypeScript",
+          desc: "将 JSON 数据转换为 TypeScript 接口定义",
+        },
+        {
+          href: "json-tree.html",
+          icon: "🌳",
+          name: "JSON 树形查看器",
+          desc: "JSON 可视化树形结构查看器，支持折叠展开和路径显示",
+        },
+        {
+          href: "json-typescript.html",
+          icon: "TS",
+          name: "JSON → TypeScript 类型生成",
+          desc: "JSON 转 TypeScript 类型",
+        },
+        {
+          href: "json-yaml.html",
+          icon: "⇄",
+          name: "JSON-YAML 转换",
+          desc: "JSON 与 YAML 格式互转，支持格式化输出",
+        },
+        {
+          href: "jsonpath-query.html",
+          icon: "$.",
+          name: "JSONPath 查询",
+          desc: "使用 JSONPath 表达式查询 JSON 数据",
+        },
+        {
+          href: "jsonpath-tester.html",
+          icon: "🔎",
+          name: "JSONPath 测试器",
+          desc: "在线测试 JSONPath 表达式，提取 JSON 数据",
+        },
+        {
+          href: "jwt-decoder.html",
+          icon: "🔓",
+          name: "JWT 解码器",
+          desc: "解码 JWT Token，查看 Header、Payload 和签名信息",
+        },
+        {
+          href: "keyboard-tester.html",
+          icon: "⌨️",
+          name: "键盘测试器",
+          desc: "测试键盘按键，显示按键事件详细信息",
+        },
+        {
+          href: "keycode.html",
+          icon: "⌨️",
+          name: "Keycode 查看器",
+          desc: "获取键盘按键的 KeyCode 值",
+        },
+        {
+          href: "license-generator.html",
+          icon: "📜",
+          name: "License 生成器",
+          desc: "生成开源许可证文件，支持 MIT、Apache、GPL 等协议",
+        },
+        {
+          href: "markdown-to-html.html",
+          icon: "⚡",
+          name: "Markdown 转 HTML 转换器",
+          desc: "Markdown 转 HTML 转换器，多格式互转，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "math-symbols.html",
+          icon: "⚡",
+          name: "数学符号大全",
+          desc: "数学符号大全，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "meta-viewport.html",
+          icon: "📱",
+          name: "Viewport Meta 生成器",
+          desc: "生成移动端 Viewport meta 标签",
+        },
+        {
+          href: "mime-lookup.html",
+          icon: "📄",
+          name: "MIME 类型查询",
+          desc: "查询文件扩展名对应的 MIME 类型",
+        },
+        {
+          href: "neumorphism.html",
+          icon: "◐",
+          name: "Neumorphism 生成器",
+          desc: "Neumorphism 软 UI 风格 CSS 代码生成器",
+        },
+        {
+          href: "nginx-config.html",
+          icon: "🔧",
+          name: "Nginx 配置生成器",
+          desc: "Nginx 配置生成器，一键在线生成，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "nginx-generator.html",
+          icon: "🔧",
+          name: "Nginx 配置生成器 | 在线工具",
+          desc: "Nginx 配置生成器 | 在线工具，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "openapi-viewer.html",
+          icon: "📄",
+          name: "OpenAPI/Swagger查看器",
+          desc: "解析展示OpenAPI文档",
+        },
+        {
+          href: "otp-generator.html",
+          icon: "🔑",
+          name: "OTP 验证码生成器",
+          desc: "生成一次性密码 (OTP/TOTP)",
+        },
+        {
+          href: "package-json-editor.html",
+          icon: "📦",
+          name: "package.json编辑器",
+          desc: "可视化编辑package.json",
+        },
+        {
+          href: "package-json-gen.html",
+          icon: "🔧",
+          name: "package.json 生成器",
+          desc: "package.json 生成器，一键在线生成，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "protobuf-decoder.html",
+          icon: "◈",
+          name: "Protobuf 解码器",
+          desc: "解码 Protobuf 二进制数据，无需 schema 定义",
+        },
+        {
+          href: "punycode.html",
+          icon: "🌐",
+          name: "Punycode 转换器",
+          desc: "国际化域名 (IDN) 与 Punycode 编码互转",
+        },
+        {
+          href: "readme-generator.html",
+          icon: "📝",
+          name: "README 生成器",
+          desc: "快速生成项目 README.md，支持徽章、特性、安装说明等",
+        },
+        {
+          href: "readme-preview.html",
+          icon: "⚡",
+          name: "README.md 实时预览器",
+          desc: "README.md 实时预览器，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "regex-cheatsheet.html",
+          icon: "📖",
+          name: "正则表达式速查",
+          desc: "正则表达式语法速查表",
+        },
+        {
+          href: "regex-explainer.html",
+          icon: "🔍",
+          name: "正则可视化解释器",
+          desc: "可视化解析正则表达式，逐步解释每个部分的含义",
+        },
+        {
+          href: "regex-generator.html",
+          icon: "🔧",
+          name: "正则表达式生成器",
+          desc: "正则表达式生成器，一键在线生成，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "regex-tester.html",
+          icon: ".*",
+          name: "正则测试器",
+          desc: "正则表达式测试，匹配高亮，捕获组展示",
+        },
+        {
+          href: "regex-visualizer.html",
+          icon: "🔧",
+          name: "正则表达式可视化器",
+          desc: "正则表达式可视化器，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "responsive-preview.html",
+          icon: "📱",
+          name: "响应式预览",
+          desc: "响应式预览，即时预览，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "rsa-keygen.html",
+          icon: "🔐",
+          name: "RSA 密钥对生成器",
+          desc: "生成 RSA 公私钥对",
+        },
+        {
+          href: "semver-compare.html",
+          icon: "🏷️",
+          name: "Semver 比较器",
+          desc: "语义化版本号比较和验证",
+        },
+        {
+          href: "shortcuts-cheatsheet.html",
+          icon: "🔧",
+          name: "快捷键速查表",
+          desc: "快捷键速查表，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "slug-generator.html",
+          icon: "🔗",
+          name: "Slug 生成器",
+          desc: "生成 URL 友好的 slug 字符串",
+        },
+        {
+          href: "sql-converter.html",
+          icon: "🔀",
+          name: "SQL 转换器",
+          desc: "SQL 转换器，多格式互转，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "sql-formatter.html",
+          icon: "📊",
+          name: "SQL 格式化",
+          desc: "SQL 语句格式化和美化",
+        },
+        {
+          href: "sql-playground.html",
+          icon: "🗄️",
+          name: "SQL在线执行器",
+          desc: "在浏览器中执行SQL查询",
+        },
+        {
+          href: "sql-to-mongo.html",
+          icon: "🔧",
+          name: "SQL 转 MongoDB 查询",
+          desc: "SQL 转 MongoDB 查询，便捷查询，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "sse-test.html",
+          icon: "⚡",
+          name: "SSE测试客户端",
+          desc: "SSE测试客户端，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "string-builder.html",
+          icon: "🔗",
+          name: "字符串拼接器",
+          desc: "可视化字符串拼接工具，支持拖拽排序和分隔符设置",
+        },
+        {
+          href: "svg-optimizer.html",
+          icon: "🎨",
+          name: "SVG优化器",
+          desc: "优化压缩SVG文件",
+        },
+        {
+          href: "svg-path-editor.html",
+          icon: "🔧",
+          name: "SVG 路径编辑器",
+          desc: "SVG 路径编辑器，在线编辑，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "symbols-table.html",
+          icon: "✨",
+          name: "特殊符号大全",
+          desc: "特殊符号大全，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "table-border.html",
+          icon: "📊",
+          name: "表格线生成器",
+          desc: "表格线生成器，一键在线生成，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "tailwind-config-generator.html",
+          icon: "🔧",
+          name: "Tailwind CSS 配置生成器",
+          desc: "Tailwind CSS 配置生成器，一键在线生成，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "tailwind-lookup.html",
+          icon: "🔧",
+          name: "Tailwind CSS 查询器",
+          desc: "Tailwind CSS 查询器，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "toml-yaml-json.html",
+          icon: "⇆",
+          name: "TOML/YAML/JSON 转换器",
+          desc: "TOML、YAML、JSON 配置格式互相转换",
+        },
+        {
+          href: "tsconfig-editor.html",
+          icon: "🔷",
+          name: "tsconfig编辑器",
+          desc: "可视化编辑tsconfig.json",
+        },
+        {
+          href: "unicode-converter.html",
+          icon: "U+",
+          name: "Unicode 转换器",
+          desc: "Unicode 编解码，支持 \\uXXXX、HTML 实体等格式",
+        },
+        {
+          href: "unicode-lookup.html",
+          icon: "🔤",
+          name: "Unicode 查询",
+          desc: "Unicode 字符查询和信息",
+        },
+        {
+          href: "url-codec.html",
+          icon: "%",
+          name: "URL 编解码",
+          desc: "URL 编码与解码，支持完整 URL 或组件",
+        },
+        {
+          href: "url-parser.html",
+          icon: "🔗",
+          name: "URL 解析器",
+          desc: "解析 URL 各组成部分，提取查询参数",
+        },
+        {
+          href: "webhook-tester.html",
+          icon: "🔗",
+          name: "Webhook测试器",
+          desc: "发送HTTP请求测试Webhook",
+        },
+        {
+          href: "websocket-test.html",
+          icon: "⚡",
+          name: "WebSocket测试客户端",
+          desc: "WebSocket测试客户端，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "xml-formatter.html",
+          icon: "📄",
+          name: "XML 格式化",
+          desc: "XML 格式化和验证",
+        },
+        {
+          href: "xml-json.html",
+          icon: "⇆",
+          name: "XML ⇄ JSON 转换",
+          desc: "XML 与 JSON 格式互转",
+        },
+        {
+          href: "xpath-tester.html",
+          icon: "🔧",
+          name: "XPath 测试器",
+          desc: "XPath 测试器，在线验证，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "code-screenshot.html",
+          icon: "📸",
+          name: "代码截图美化",
+          desc: "将代码转换为精美的截图，支持50+编程语言和多种主题",
+        },
+        {
+          href: "chart-generator.html",
+          icon: "💻",
+          name: "数据图表生成器",
+          desc: "数据图表生成器，一键在线生成，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "gradient-generator.html",
+          icon: "💻",
+          name: "CSS 渐变生成器",
+          desc: "CSS 渐变生成器，一键在线生成，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "http-client.html",
+          icon: "💻",
+          name: "HTTP 请求测试",
+          desc: "HTTP 请求测试，在线验证，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "json-schema-generator.html",
+          icon: "💻",
+          name: "JSON Schema 生成器",
+          desc: "JSON Schema 生成器，一键在线生成，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "number-base.html",
+          icon: "💻",
+          name: "进制转换器",
+          desc: "进制转换器，多格式互转，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "diff-checker.html",
+          icon: "📊",
+          name: "文本差异比较",
+          desc: "比较两段文本的差异，高亮显示修改内容",
+        },
+        {
+          href: "keyboard-codes.html",
+          icon: "⌨️",
+          name: "键盘码查询",
+          desc: "键盘按键码查询",
+        },
+        {
+          href: "url-encoder.html",
+          icon: "🔗",
+          name: "URL编码",
+          desc: "URL编码解码",
+        },
+        {
+          href: "markdown-preview.html",
+          icon: "📝",
+          name: "Markdown预览",
+          desc: "实时预览Markdown",
+        },
+        {
+          href: "table-generator.html",
+          icon: "🔧",
+          name: "表格生成器",
+          desc: "生成Markdown/HTML/CSV表格",
+        },
+        {
+          href: "api-tester.html",
+          icon: "🔧",
+          name: "Api Tester",
+          desc: "Api Tester，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "css-animation.html",
+          icon: "🔧",
+          name: "Css Animation",
+          desc: "Css Animation，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "css-flexbox.html",
+          icon: "🔧",
+          name: "Css Flexbox",
+          desc: "Css Flexbox，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "css-gradient-generator.html",
+          icon: "🔧",
+          name: "Css Gradient Generator",
+          desc: "Css Gradient Generator，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "curl-builder.html",
+          icon: "🔧",
+          name: "Curl Builder",
+          desc: "Curl Builder，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "docker-command-builder.html",
+          icon: "🔧",
+          name: "Docker Command Builder",
+          desc: "Docker Command Builder，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "env-generator.html",
+          icon: "🔧",
+          name: "Env Generator",
+          desc: "Env Generator，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "git-command-builder.html",
+          icon: "🔧",
+          name: "Git Command Builder",
+          desc: "Git Command Builder，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "git-command-helper.html",
+          icon: "🔧",
+          name: "Git Command Helper",
+          desc: "Git Command Helper，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "htaccess-generator.html",
+          icon: "🔧",
+          name: "Htaccess 生成器",
+          desc: "Htaccess 生成器，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "html-entity-encoder.html",
+          icon: "🔧",
+          name: "Html Entity Encoder",
+          desc: "Html Entity Encoder，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "html-minifier.html",
+          icon: "🔧",
+          name: "Html Minifier",
+          desc: "Html Minifier，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "http-status-codes.html",
+          icon: "🔧",
+          name: "Http Status Codes",
+          desc: "Http Status Codes，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "json-path-finder.html",
+          icon: "🔧",
+          name: "Json Path Finder",
+          desc: "Json Path Finder，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "json-path-tester.html",
+          icon: "🔧",
+          name: "Json Path Tester",
+          desc: "Json Path Tester，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "lorem-ipsum.html",
+          icon: "🔧",
+          name: "Lorem Ipsum 占位文本生成器",
+          desc: "Lorem Ipsum 占位文本生成器，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "nginx-config-generator.html",
+          icon: "🔧",
+          name: "Nginx Config Generator",
+          desc: "Nginx Config Generator，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "npm-command-helper.html",
+          icon: "🔧",
+          name: "Npm Command Helper",
+          desc: "Npm Command Helper，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "sql-keywords.html",
+          icon: "🔧",
+          name: "Sql Keywords",
+          desc: "Sql Keywords，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "string-escape.html",
+          icon: "🔧",
+          name: "String Escape",
+          desc: "String Escape，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "yaml-formatter.html",
+          icon: "🔧",
+          name: "Yaml Formatter",
+          desc: "Yaml Formatter，在线使用，开发工具，浏览器本地运行无需上传",
+        },
+        {
+          href: "css-specificity-calculator.html",
+          icon: "⚖️",
+          name: "CSS 选择器权重计算器",
+          desc: "输入任意 CSS 选择器，实时计算其优先级权重（a-b-c 三元组），并可视化比较多个选择器的层叠顺序。",
+        },
+        {
+          href: "fluid-typography-clamp-generator.html",
+          icon: "Aa",
+          name: "流体排版 / CSS clamp 生成器",
+          desc: "根据最小/最大视口宽度和字号，自动生成 CSS clamp() 函数，实现响应式流体字体大小，无需媒体查询。",
+        },
+        {
+          href: "media-query-builder.html",
+          icon: "📐",
+          name: "CSS 媒体查询生成器",
+          desc: "可视化配置断点条件（宽度、高度、方向、分辨率），一键生成标准 CSS @media 查询代码。",
+        },
+        {
+          href: "px-rem-em-converter.html",
+          icon: "px",
+          name: "px / rem / em 单位转换器",
+          desc: "基于根字号（root font-size）在 px、rem、em、pt 之间互相换算，快速查出任意 CSS 尺寸的等效值。",
+        },
+        {
+          href: "type-scale-calculator.html",
+          icon: "Aa",
+          name: "字型比例计算器",
+          desc: "输入基准字号和比例（Major Third、Perfect Fourth 等），生成完整的字型比例阶梯，并预览各级 heading 效果。",
+        },
+        {
+          href: "css-container-query-builder.html",
+          icon: "📦",
+          name: "CSS 容器查询生成器",
+          desc: "可视化构建 CSS @container 查询规则，设置容器名称和尺寸条件，生成即用代码片段。",
+        },
+        {
+          href: "css-z-index-stacking-visualizer.html",
+          icon: "📐",
+          name: "CSS z-index 层叠上下文可视化",
+          desc: "交互式演示 CSS 层叠上下文规则：添加元素、设置 z-index 和触发层叠的属性，实时看到层叠顺序。",
+        },
+        {
+          href: "svg-sprite-generator.html",
+          icon: "🎯",
+          name: "SVG Sprite 生成器",
+          desc: "上传多个 SVG 图标，合并生成 \u003csvg> symbol sprite 文件，并输出每个图标的 \u003cuse> 引用代码。",
+        },
+        {
+          href: "svg-to-data-uri.html",
+          icon: "🖼",
+          name: "SVG 转 Data URI 编码器",
+          desc: "将 SVG 代码转换为适合 CSS background-image 使用的 data URI 格式，支持 URL 编码和 Base64 两种方式。",
+        },
+        {
+          href: "sri-hash-generator.html",
+          icon: "🔐",
+          name: "SRI 哈希生成器",
+          desc: "为 CDN 脚本或样式表生成 Subresource Integrity（SRI）integrity 属性值，支持 SHA-256/384/512。",
+        },
+        {
+          href: "regex-find-replace-tester.html",
+          icon: ".*",
+          name: "Regex 查找替换测试器",
+          desc: "输入正则表达式和替换模式，实时预览在输入文本上的替换结果，支持捕获组引用（$1, \\1）。",
+        },
+        {
+          href: "har-viewer.html",
+          icon: "🌐",
+          name: "HAR 文件查看器",
+          desc: "拖入 .har 文件，可视化展示所有 HTTP 请求的时序瀑布图、请求头、响应体和耗时统计。",
+        },
+        {
+          href: "json-merge-patch.html",
+          icon: "⇄",
+          name: "JSON Merge Patch 工具",
+          desc: "按 RFC 7396 规范对两个 JSON 文档执行 merge patch 操作，实时预览合并结果。",
+        },
+        {
+          href: "ndjson-formatter.html",
+          icon: "{L}",
+          name: "NDJSON / JSONL 格式化器",
+          desc: "格式化和验证换行分隔 JSON（NDJSON/JSONL）文件，逐行解析并高亮错误行，支持行数统计。",
+        },
+        {
+          href: "ini-file-editor.html",
+          icon: "⚙️",
+          name: "INI / 配置文件编辑器",
+          desc: "在线解析和编辑 .ini/.cfg 配置文件，支持分节（section）、键值对增删改，导出格式化后的文件。",
+        },
+        {
+          href: "java-properties-editor.html",
+          icon: "⚙️",
+          name: "Java .properties 文件编辑器",
+          desc: "在线编辑 Java .properties 文件，支持 Unicode 转义（\\uXXXX）自动处理、注释保留和键值对搜索。",
+        },
+        {
+          href: "access-log-analyzer.html",
+          icon: "📊",
+          name: "Nginx / Apache 访问日志分析器",
+          desc: "粘贴 Nginx 或 Apache 访问日志，自动解析并统计 Top IP、路径、状态码、带宽，可视化展示流量模式。",
+        },
+        {
+          href: "ssh-keygen-helper.html",
+          icon: "🔑",
+          name: "SSH 密钥对生成器",
+          desc: "纯浏览器端生成 RSA / Ed25519 SSH 密钥对，无需安装 ssh-keygen，输出公钥、私钥和 authorized_keys 格式。",
+        },
+        {
+          href: "po-file-editor.html",
+          icon: "🌐",
+          name: "PO / Gettext 翻译文件编辑器",
+          desc: "上传 .po 或 .pot 文件，以表格形式编辑 msgid 和 msgstr，支持过滤未翻译条目，下载修改后的文件。",
+        },
+        {
+          href: "email-address-validator.html",
+          icon: "@",
+          name: "邮箱地址格式验证器",
+          desc: "验证邮箱地址语法是否符合 RFC 5321/5322 规范，检查域名部分格式，并批量处理多行输入。",
+        },
+        {
+          href: "geojson-viewer.html",
+          icon: "🗺",
+          name: "GeoJSON 查看器 / 编辑器",
+          desc: "在地图上渲染 GeoJSON 文件（使用 Leaflet），支持点击查看属性、高亮选中要素，并可编辑 JSON 实时刷新。",
+        },
+        {
+          href: "isbn-validator.html",
+          icon: "📚",
+          name: "ISBN 验证与解析",
+          desc: "验证 ISBN-10 / ISBN-13 校验位，解析出版商和出版社前缀含义，并在 ISBN-10 和 ISBN-13 之间互转。",
+        },
+        {
+          href: "crc32-checksum-calculator.html",
+          icon: "🔢",
+          name: "CRC32 / Adler-32 校验计算器",
+          desc: "计算文本或文件的 CRC-32、Adler-32、FNV-1a 校验值，补充现有 MD5/SHA 系哈希工具未覆盖的非密码学校验。",
+        },
+        {
+          href: "favicon-ico-generator.html",
+          icon: "🌐",
+          name: "Favicon 多尺寸 ICO 生成器",
+          desc: "上传 PNG/SVG 图片，一键生成包含 16×16、32×32、48×48 的 .ico 文件，以及 apple-touch-icon 和 PWA manifest 所需的各尺寸 PNG。",
+        },
+        {
+          href: "markdown-linter.html",
+          icon: "📝",
+          name: "Markdown 语法检查器",
+          desc: "检查 Markdown 文档中的常见问题：标题层级跳跃、重复标题、代码块未指定语言、链接格式错误等，输出带行号的报告。",
+        },
+        {
+          href: "json-schema-to-form.html",
+          icon: "📋",
+          name: "JSON Schema → HTML 表单生成器",
+          desc: "粘贴 JSON Schema，自动生成对应的 HTML 表单（支持字符串、数字、枚举、对象、数组类型），并实时验证输入值。",
+        },
+        {
+          href: "cors-preflight-debugger.html",
+          icon: "🔀",
+          name: "CORS 请求调试器",
+          desc: "模拟 preflight 请求，解析 CORS 响应头，定位跨域报错根因，显示各字段含义。",
+        },
+      ];
+      const ROW_HEIGHT = 52;
+      const vp = document.getElementById("cat-viewport");
+      const spacer = document.getElementById("cat-spacer");
+      const rowCache = new Map();
+
+      const virtualizer = new VirtualCore.Virtualizer({
+        count: CAT_TOOLS.length,
+        getScrollElement: () => vp,
+        estimateSize: () => ROW_HEIGHT,
+        overscan: 8,
+        observeElementRect: VirtualCore.observeElementRect,
+        observeElementOffset: VirtualCore.observeElementOffset,
+        scrollToFn: VirtualCore.elementScroll,
+        getItemKey: (index) => index,
+        onChange: () => renderRows(),
+      });
+
+      function createRow(tool) {
+        const row = document.createElement("div");
+        row.className = "cat-row";
+        const link = document.createElement("a");
+        link.className = "cat-row-link";
+        link.href = tool.href;
+        const icon = document.createElement("span");
+        icon.className = "cat-icon-sm";
+        icon.textContent = tool.icon;
+        const name = document.createElement("span");
+        name.className = "cat-row-name";
+        name.textContent = tool.name;
+        link.appendChild(icon);
+        link.appendChild(name);
+        const desc = document.createElement("span");
+        desc.className = "cat-col cat-col-desc";
+        desc.textContent = tool.desc;
+        desc.title = tool.desc;
+        row.appendChild(link);
+        row.appendChild(desc);
+        return row;
+      }
+
+      function renderRows() {
+        const items = virtualizer.getVirtualItems();
+        spacer.style.height = virtualizer.getTotalSize() + "px";
+        const liveKeys = new Set(items.map((i) => i.key));
+        for (const [key, row] of rowCache) {
+          if (!liveKeys.has(key)) {
+            row.remove();
+            rowCache.delete(key);
+          }
+        }
+        for (const item of items) {
+          let row = rowCache.get(item.key);
+          if (!row) {
+            row = createRow(CAT_TOOLS[item.index]);
+            rowCache.set(item.key, row);
+          }
+          if (!row.isConnected) {
+            spacer.appendChild(row);
+          }
+          row.style.transform = "translateY(" + item.start + "px)";
+        }
+      }
+
+      virtualizer._willUpdate();
+      virtualizer.measure();
+    </script>
   </body>
 </html>
