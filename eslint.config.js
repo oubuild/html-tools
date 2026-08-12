@@ -10,6 +10,30 @@ export default [
   // Base config for all files
   js.configs.recommended,
 
+  // Node.js 脚本（scripts/、tests/ 等构建/测试文件）
+  // 声明 Node 全局变量，避免 no-undef 误报 console/process 等
+  {
+    files: ['scripts/**/*.js', 'scripts/**/*.mjs', 'tests/**/*.js', '*.config.js'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      globals: {
+        console: 'readonly',
+        process: 'readonly',
+        __dirname: 'readonly',
+        __filename: 'readonly',
+        require: 'readonly',
+        module: 'readonly',
+        exports: 'readonly',
+        Buffer: 'readonly',
+        global: 'readonly'
+      }
+    },
+    rules: {
+      'no-console': 'off' // 构建/测试脚本允许 console 输出
+    }
+  },
+
   // HTML files + extracted assets/js (same project conventions)
   {
     files: ['**/*.html', 'assets/js/**/*.js'],

@@ -509,6 +509,7 @@ async function generateCategoryPages(categories, groupedTools, registeredPaths) 
   }
 
   const generated = [];
+  let writtenCount = 0;
   for (const catId of Object.keys(categories)) {
     const rel = `tools/${catId}/index.html`;
     if (registeredPaths.has(rel)) continue;
@@ -525,14 +526,17 @@ async function generateCategoryPages(categories, groupedTools, registeredPaths) 
       }
     }
 
+    // 所有应存在的分类页都计入 generated（sitemap 依赖此完整列表），
+    // 仅内容变化时写盘，避免 dev watcher 陷入 rebuild 循环
+    generated.push(rel);
     const abs = path.join(ROOT_DIR, rel);
     fs.mkdirSync(path.dirname(abs), { recursive: true });
     if (!fs.existsSync(abs) || fs.readFileSync(abs, 'utf8') !== html) {
       fs.writeFileSync(abs, html);
-      generated.push(rel);
+      writtenCount++;
     }
   }
-  console.log(`✅ 分类落地页: ${generated.length} 个`);
+  console.log(`✅ 分类落地页: ${generated.length} 个${writtenCount > 0 ? `（写入 ${writtenCount} 个）` : '（无变化）'}`);
   return generated;
 }
 
@@ -717,7 +721,7 @@ async function updateIndexHtml(categoriesJs, toolsJs, toolCount, categoryCount) 
 /**
  * 更新 README.md
  */
-function updateReadme(toolCount, categoryCount) {
+function updateReadme(toolCount) {
   try {
     if (!fs.existsSync(README_MD)) {
       return false;
